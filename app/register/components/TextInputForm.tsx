@@ -1,0 +1,196 @@
+"use client";
+
+import React, { useCallback, useState } from "react";
+import TextInput from "./TextInput";
+import TextArea from "./TextArea";
+import {
+  StyledButtonWrapper,
+  StyledButton,
+  InputRowWrapper,
+  InputColumnWrapper,
+  Divider,
+} from "./styles/TextInputForm.styles";
+import ImageUploader from "./ImageUploader";
+
+type inputFormDataType = {
+  newsletterName: string;
+  publisher: string;
+  introduction: string;
+  subscriptionFee: string;
+  deliveryPeriod: string;
+  keywords: string[];
+  previousIssueLink: string;
+  subscribeLink: string;
+  image: string | ArrayBuffer | null;
+};
+
+const INITIAL_FORM_DATA = {
+  newsletterName: "",
+  publisher: "",
+  introduction: "",
+  subscriptionFee: "",
+  deliveryPeriod: "",
+  keywords: [],
+  previousIssueLink: "",
+  subscribeLink: "",
+  image: null,
+};
+
+const INITIAL_KEYWORD = {
+  keyword1: "",
+  keyword2: "",
+  keyword3: "",
+  keyword4: "",
+};
+
+const INPUT_DATA = {
+  newsletterName: { label: "뉴스레터명", name: "newsletterName" },
+  publisher: { label: "발행인", name: "publisher" },
+  introduction: { label: "소개글", name: "introduction" },
+  subscriptionFee: { label: "구독비", name: "subscriptionFee" },
+  deliveryPeriod: { label: "발송 주기", name: "deliveryPeriod" },
+  keywords: [
+    { label: "키워드1", subLabel: "분야", name: "keyword1" },
+    { label: "키워드2", subLabel: "직무", name: "keyword2" },
+    { label: "키워드3", subLabel: "목적", name: "keyword3" },
+    { label: "키워드4", subLabel: "고유성", name: "keyword4" },
+  ],
+  previousIssueLink: { label: "지난호 보기 링크", name: "previousIssueLink" },
+  subscribeLink: { label: "구독하기 링크", name: "subscribeLink" },
+} as const;
+
+const {
+  newsletterName,
+  publisher,
+  introduction,
+  subscriptionFee,
+  deliveryPeriod,
+  keywords,
+  previousIssueLink,
+  subscribeLink,
+} = INPUT_DATA;
+
+const TextInputForm = () => {
+  const [formData, setFormData] =
+    useState<inputFormDataType>(INITIAL_FORM_DATA);
+  const [keywordFormData, setKeywordFormData] = useState(INITIAL_KEYWORD);
+
+  const handleFormDataChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = event.target;
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    },
+    []
+  );
+
+  const handleKeywordChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = event.target;
+      setKeywordFormData((prev) => ({ ...prev, [name]: value }));
+    },
+    []
+  );
+
+  const handleSubmit = useCallback(
+    (event: React.FormEvent) => {
+      event.preventDefault();
+      if (
+        typeof formData.image === "string" &&
+        formData.newsletterName &&
+        formData.introduction &&
+        formData.publisher &&
+        formData.keywords.length > 0
+      ) {
+        const body = { ...formData, keywords: Object.values(keywordFormData) };
+        console.log(body);
+      } else {
+        alert("필수 입력 항목을 모두 입력해주세요.");
+      }
+    },
+    [formData, keywordFormData]
+  );
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <TextInput
+        required
+        size="md"
+        label={newsletterName.label}
+        name={newsletterName.name}
+        value={formData[newsletterName.name]}
+        onChange={handleFormDataChange}
+      />
+      <TextInput
+        required
+        size="md"
+        label={publisher.label}
+        name={publisher.name}
+        value={formData[publisher.name]}
+        onChange={handleFormDataChange}
+      />
+      <TextInput
+        required
+        size="lg"
+        label={introduction.label}
+        name={introduction.name}
+        value={formData[introduction.name]}
+        onChange={handleFormDataChange}
+      />
+      <Divider />
+      <InputRowWrapper>
+        <InputColumnWrapper>
+          <TextInput
+            size="sm"
+            label={subscriptionFee.label}
+            name={subscriptionFee.name}
+            value={formData[subscriptionFee.name]}
+            onChange={handleFormDataChange}
+          />
+        </InputColumnWrapper>
+        <InputColumnWrapper>
+          <TextInput
+            size="sm"
+            label={deliveryPeriod.label}
+            name={deliveryPeriod.name}
+            value={formData[deliveryPeriod.name]}
+            onChange={handleFormDataChange}
+          />
+        </InputColumnWrapper>
+      </InputRowWrapper>
+      <InputRowWrapper>
+        {keywords.map(({ name, label, subLabel }, index) => (
+          <InputColumnWrapper key={name}>
+            <TextInput
+              size="sm"
+              required={index === 0}
+              label={label}
+              subLabel={subLabel}
+              name={name}
+              value={keywordFormData[name]}
+              onChange={handleKeywordChange}
+            />
+          </InputColumnWrapper>
+        ))}
+      </InputRowWrapper>
+      <Divider />
+      <TextArea
+        label={previousIssueLink.label}
+        name={previousIssueLink.name}
+        value={formData[previousIssueLink.name]}
+        onChange={handleFormDataChange}
+      />
+      <TextArea
+        label={subscribeLink.label}
+        name={subscribeLink.name}
+        value={formData[subscribeLink.name]}
+        onChange={handleFormDataChange}
+      />
+      <Divider />
+      <StyledButtonWrapper>
+        <StyledButton>등록하기</StyledButton>
+      </StyledButtonWrapper>
+    </form>
+  );
+};
+
+export default TextInputForm;
