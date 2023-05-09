@@ -21,7 +21,7 @@ type inputFormDataType = {
   keywords: string[];
   previousIssueLink: string;
   subscribeLink: string;
-  image: string | ArrayBuffer | null;
+  mainImage: string | ArrayBuffer | null;
 };
 
 const INITIAL_FORM_DATA = {
@@ -33,7 +33,7 @@ const INITIAL_FORM_DATA = {
   keywords: [],
   previousIssueLink: "",
   subscribeLink: "",
-  image: null,
+  mainImage: null,
 };
 
 const INITIAL_KEYWORD = {
@@ -74,32 +74,53 @@ const TextInputForm = () => {
   const [formData, setFormData] =
     useState<inputFormDataType>(INITIAL_FORM_DATA);
   const [keywordFormData, setKeywordFormData] = useState(INITIAL_KEYWORD);
+  const [imageName, setImageName] = useState("");
 
   const handleFormDataChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const { name, value } = event.target;
+      const { name, value } = event.currentTarget;
       setFormData((prev) => ({ ...prev, [name]: value }));
     },
     []
   );
 
   const handleKeywordChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const { name, value } = event.target;
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.currentTarget;
       setKeywordFormData((prev) => ({ ...prev, [name]: value }));
     },
     []
   );
 
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.currentTarget.files !== null) {
+      const file = event.currentTarget.files[0];
+      const name = event.currentTarget.name;
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        setFormData((prev) => ({
+          ...prev,
+          [name]: reader.result,
+        }));
+        setImageName(file.name);
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+  };
+
   const handleSubmit = useCallback(
-    (event: React.FormEvent) => {
+    async (event: React.FormEvent) => {
       event.preventDefault();
       if (
-        typeof formData.image === "string" &&
+        formData.mainImage !== null &&
         formData.newsletterName &&
         formData.introduction &&
         formData.publisher &&
-        formData.keywords.length > 0
+        keywordFormData.keyword1
       ) {
         const body = { ...formData, keywords: Object.values(keywordFormData) };
         console.log(body);
@@ -186,8 +207,15 @@ const TextInputForm = () => {
         onChange={handleFormDataChange}
       />
       <Divider />
+      <ImageUploader
+        name={imageName}
+        selectedImage={formData.mainImage}
+        onChange={handleImageChange}
+      />
       <StyledButtonWrapper>
-        <StyledButton>등록하기</StyledButton>
+        <StyledButton id="submit" type="submit">
+          등록하기
+        </StyledButton>
       </StyledButtonWrapper>
     </form>
   );
