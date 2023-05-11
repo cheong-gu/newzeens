@@ -143,6 +143,12 @@ const NewsletterForm = () => {
 
               resetData();
               router.push(`/register`);
+            } else {
+              // 에러 핸들링
+              // FIXME: 현재 api에서 모든 항목을 입력하게끔 되어있음. UI에서는 필수 항목이 아닌것들도 있음
+              if (response.status === 400) {
+                alert("항목을 모두 입력해주세요.");
+              }
             }
           });
         } catch (e) {
