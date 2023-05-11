@@ -19,7 +19,10 @@ const RegisterPage = async () => {
 
   return (
     <div className={`${styles.container} ${styles["container-margin"]}`}>
-      <h1 className={styles.title}>리스트 관리</h1>
+      <h1 className={styles.title}>
+        리스트 관리{" "}
+        <span className={styles["title-index"]}>{newsletterList.length}</span>
+      </h1>
       <Management list={newsletterList} />
     </div>
   );

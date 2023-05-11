@@ -1,24 +1,5 @@
 import styled from "@emotion/styled";
 
-const Container = styled.div`
-  margin: 0 auto;
-
-  max-width: 1094px;
-  width: 100%;
-
-  padding: 76px 52px;
-  background-color: #ffffff;
-
-  border: 1px solid #dfe4f5;
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.9);
-`;
-
-const ContainerHeader = styled.h1`
-  font-size: 30px;
-  font-weight: 700;
-  margin-bottom: 52px;
-`;
-
 export const StyledButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;

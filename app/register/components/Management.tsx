@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useCallback } from "react";
 import { NewsletterFormType } from "../newsletter.type";
 import {
   ListWrapper,
@@ -12,16 +12,32 @@ import {
   Caption,
 } from "./styles/Management.styles";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface ManagementProps {
   list: NewsletterFormType[];
 }
 
 const Management = ({ list }: ManagementProps) => {
-  const handleDelete = () => {
-    alert("삭제 기능 준비중");
+  const router = useRouter();
+  const deleteAlert = () => {
+    const deleteAlert = confirm("전체 리스트가 삭제됩니다. 삭제하시겠습니까?");
+    if (deleteAlert) {
+      handleDelete();
+    }
   };
-
+  const handleDelete = useCallback(async () => {
+    try {
+      await fetch("http://localhost:8080/newsLetter", {
+        method: "DELETE",
+      }).then((response) => {
+        console.log("[NewsletterContaint/postNewsletter]", { response });
+        router.push("/register");
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }, [router]);
   return (
     <>
       {list && list.length > 0 ? (
@@ -45,7 +61,7 @@ const Management = ({ list }: ManagementProps) => {
                   <Summary>{introduction}</Summary>
                 </InfoBox>
               </ListInfo>
-              <ListButton type="button" onClick={handleDelete}>
+              <ListButton type="button" onClick={deleteAlert}>
                 <Image src="/delete.svg" alt="delete" width={24} height={24} />
               </ListButton>
             </ListWrapper>
