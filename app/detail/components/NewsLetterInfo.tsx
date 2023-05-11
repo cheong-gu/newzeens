@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import styles from "./styles/styles.module.css";
+import styles from "./styles/info.module.css";
 import Button from "./Button";
 import Link from "next/link";
 
@@ -15,22 +15,29 @@ const NewsLetterInfo = () => {
         height={387}
       />
       <div className={styles["info-box"]}>
-        <h1 className={styles["newsletter-name"]}>
-          {MOCK_DATA.newsletterName}
-        </h1>
-        <h3 className={styles["publisher"]}>{MOCK_DATA.publisher}</h3>
-        <div className={styles["keyword-box"]}>
-          <div className={styles["keyword-row"]}>
-            <p className={styles["category"]}>소개</p>
-            <p className={styles["explanation"]}>{MOCK_DATA.introduction}</p>
-          </div>
-          <div className={styles["keyword-row"]}>
-            <p className={styles["category"]}>발송 주기</p>
-            <p className={styles["explanation"]}>{MOCK_DATA.deliveryPeriod}</p>
-          </div>
-          <div className={styles["keyword-row"]}>
-            <p className={styles["category"]}>구독비</p>
-            <p className={styles["explanation"]}>{MOCK_DATA.subscriptionFee}</p>
+        <div>
+          {" "}
+          <h1 className={styles["newsletter-name"]}>
+            {MOCK_DATA.newsletterName}
+          </h1>
+          <h3 className={styles["publisher"]}>{MOCK_DATA.publisher}</h3>
+          <div className={styles["keyword-box"]}>
+            <div className={styles["keyword-row"]}>
+              <p className={styles["category"]}>소개</p>
+              <p className={styles["explanation"]}>{MOCK_DATA.introduction}</p>
+            </div>
+            <div className={styles["keyword-row"]}>
+              <p className={styles["category"]}>발송 주기</p>
+              <p className={styles["explanation"]}>
+                {MOCK_DATA.deliveryPeriod}
+              </p>
+            </div>
+            <div className={styles["keyword-row"]}>
+              <p className={styles["category"]}>구독비</p>
+              <p className={styles["explanation"]}>
+                {MOCK_DATA.subscriptionFee}
+              </p>
+            </div>
           </div>
         </div>
         <div className={styles["button-box"]}>
