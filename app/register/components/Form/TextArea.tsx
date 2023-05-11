@@ -1,5 +1,5 @@
 import React from "react";
-import { Label } from "./styles/TextInput.styles";
+import { Label } from "../styles/TextInput.styles";
 import styled from "@emotion/styled";
 
 interface TextInputProps {

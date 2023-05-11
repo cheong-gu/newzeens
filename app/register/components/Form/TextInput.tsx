@@ -5,7 +5,7 @@ import {
   Required,
   StyledInput,
   SubLabel,
-} from "./styles/TextInput.styles";
+} from "../styles/TextInput.styles";
 
 interface TextInputProps {
   name: string;

@@ -1,12 +1,12 @@
 import React from "react";
-import { Label, Required } from "./styles/TextInput.styles";
+import { Label, Required } from "../styles/TextInput.styles";
 import Image from "next/image";
 import {
   Wrapper,
   ImageBox,
   ImageName,
   UploadButton,
-} from "./styles/ImageUploader.styles";
+} from "../styles/ImageUploader.styles";
 
 interface ImageUploaderProps {
   name: string;

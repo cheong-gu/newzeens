@@ -1,28 +1,17 @@
 "use client";
 
 import React, { useCallback, useState } from "react";
-import TextInput from "./TextInput";
-import TextArea from "./TextArea";
 import {
   StyledButtonWrapper,
   StyledButton,
   InputRowWrapper,
   InputColumnWrapper,
   Divider,
-} from "./styles/TextInputForm.styles";
-import ImageUploader from "./ImageUploader";
-
-type inputFormDataType = {
-  newsletterName: string;
-  publisher: string;
-  introduction: string;
-  subscriptionFee: string;
-  deliveryPeriod: string;
-  keywords: string[];
-  previousIssueLink: string;
-  subscribeLink: string;
-  mainImage: string | ArrayBuffer | null;
-};
+} from "./styles/NewsletterForm.styles";
+import TextInput from "./Form/TextInput";
+import TextArea from "./Form/TextArea";
+import ImageUploader from "./Form/ImageUploader";
+import { NewsletterFormType } from "../newsletter.type";
 
 const INITIAL_FORM_DATA = {
   newsletterName: "",
@@ -30,14 +19,14 @@ const INITIAL_FORM_DATA = {
   introduction: "",
   subscriptionFee: "",
   deliveryPeriod: "",
+  field: "",
   keywords: [],
   previousIssueLink: "",
   subscribeLink: "",
   mainImage: null,
 };
 
-const INITIAL_KEYWORD = {
-  keyword1: "",
+const INITIAL_KEYWORD_DATA = {
   keyword2: "",
   keyword3: "",
   keyword4: "",
@@ -49,8 +38,8 @@ const INPUT_DATA = {
   introduction: { label: "소개글", name: "introduction" },
   subscriptionFee: { label: "구독비", name: "subscriptionFee" },
   deliveryPeriod: { label: "발송 주기", name: "deliveryPeriod" },
+  field: { label: "키워드1", subLabel: "분야", name: "field" },
   keywords: [
-    { label: "키워드1", subLabel: "분야", name: "keyword1" },
     { label: "키워드2", subLabel: "직무", name: "keyword2" },
     { label: "키워드3", subLabel: "목적", name: "keyword3" },
     { label: "키워드4", subLabel: "고유성", name: "keyword4" },
@@ -65,16 +54,22 @@ const {
   introduction,
   subscriptionFee,
   deliveryPeriod,
+  field,
   keywords,
   previousIssueLink,
   subscribeLink,
 } = INPUT_DATA;
 
-const TextInputForm = () => {
-  const [formData, setFormData] =
-    useState<inputFormDataType>(INITIAL_FORM_DATA);
-  const [keywordFormData, setKeywordFormData] = useState(INITIAL_KEYWORD);
+const NewsletterForm = () => {
+  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+  const [keywordFormData, setKeywordFormData] = useState(INITIAL_KEYWORD_DATA);
   const [imageName, setImageName] = useState("");
+
+  const resetData = useCallback(() => {
+    setFormData(INITIAL_FORM_DATA);
+    setKeywordFormData(INITIAL_KEYWORD_DATA);
+    setImageName("");
+  }, []);
 
   const handleFormDataChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -120,9 +115,17 @@ const TextInputForm = () => {
         formData.newsletterName &&
         formData.introduction &&
         formData.publisher &&
-        keywordFormData.keyword1
+        formData.field
       ) {
-        const body = { ...formData, keywords: Object.values(keywordFormData) };
+        const body: NewsletterFormType = {
+          ...formData,
+          mainImage: formData.mainImage,
+          keywords: [
+            keywordFormData.keyword2,
+            keywordFormData.keyword3,
+            keywordFormData.keyword4,
+          ],
+        };
         console.log(body);
       } else {
         alert("필수 입력 항목을 모두 입력해주세요.");
@@ -179,11 +182,21 @@ const TextInputForm = () => {
         </InputColumnWrapper>
       </InputRowWrapper>
       <InputRowWrapper>
-        {keywords.map(({ name, label, subLabel }, index) => (
+        <InputColumnWrapper>
+          <TextInput
+            size="sm"
+            required
+            label={field.label}
+            subLabel={field.subLabel}
+            name={field.name}
+            value={formData[field.name]}
+            onChange={handleFormDataChange}
+          />
+        </InputColumnWrapper>
+        {keywords.map(({ name, label, subLabel }) => (
           <InputColumnWrapper key={name}>
             <TextInput
               size="sm"
-              required={index === 0}
               label={label}
               subLabel={subLabel}
               name={name}
@@ -221,4 +234,4 @@ const TextInputForm = () => {
   );
 };
 
-export default TextInputForm;
+export default NewsletterForm;
