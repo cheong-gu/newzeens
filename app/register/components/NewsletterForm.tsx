@@ -12,6 +12,7 @@ import TextInput from "./Form/TextInput";
 import TextArea from "./Form/TextArea";
 import ImageUploader from "./Form/ImageUploader";
 import { NewsletterFormType } from "../newsletter.type";
+import { useRouter } from "next/navigation";
 
 const INITIAL_FORM_DATA = {
   newsletterName: "",
@@ -61,6 +62,8 @@ const {
 } = INPUT_DATA;
 
 const NewsletterForm = () => {
+  const router = useRouter();
+
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const [keywordFormData, setKeywordFormData] = useState(INITIAL_KEYWORD_DATA);
   const [imageName, setImageName] = useState("");
@@ -126,12 +129,30 @@ const NewsletterForm = () => {
             keywordFormData.keyword4,
           ],
         };
-        console.log(body);
+        try {
+          await fetch("http://localhost:8080/newsLetter", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          }).then(async (response) => {
+            if (response.ok) {
+              const result = await response.json();
+              console.log("[NewsletterContaint/postNewsletter]", { result });
+
+              resetData();
+              router.push(`/register`);
+            }
+          });
+        } catch (e) {
+          console.error(e);
+        }
       } else {
         alert("필수 입력 항목을 모두 입력해주세요.");
       }
     },
-    [formData, keywordFormData]
+    [formData, keywordFormData, resetData, router]
   );
 
   return (
