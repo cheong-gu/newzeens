@@ -24,14 +24,19 @@ export const NewsLetter = ({ list }: { list: ListProps | null }) => {
     font-size: 12px;
     margin: 10px 0;
   `;
-
+  console.log(list);
+  console.log(list?.publisher);
+  console.log(list?.field);
   return (
     <OutLine>
       <div className="grid">
         <ImageStyle>
           <Image src="/body.png" alt="" width={319} height={319} />
         </ImageStyle>
-        <BtnStyle>{list?.keywords[0].type}</BtnStyle>
+        <BtnStyle>{list?.field}</BtnStyle>
+        {list?.keywords.map((el, idx) => (
+          <BtnStyle key={idx}>{el}</BtnStyle>
+        ))}
         <div className="title">
           <span>{list?.newsletterName}</span>
           <span>{list?.publisher}</span>

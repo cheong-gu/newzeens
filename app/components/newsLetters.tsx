@@ -3,24 +3,31 @@ import { Key, useEffect, useState } from "react";
 import { NewsLetter } from "./newsLetter";
 
 export interface ListProps {
-  map(
-    arg0: (el: ListProps | null, idx: Key | null | undefined) => JSX.Element
-  ): import("react").ReactNode;
   newsletterName: string;
   publisher: string;
   introduction: string;
   subscriptionFee: string;
-  keywords: {
-    type: string;
-    name: string;
-  };
+  field: string;
+  keywords: [type: string, name: string];
   deliveryPeriod: string;
   previousIssueLink: string;
   subscribeLink: string;
   mainImage: string;
 }
 
-export default function NewsLetters() {
+interface MyComponentProps {
+  field: string;
+  keywords: string[];
+  deliveryPeriod: string;
+  subscriptionFee: string;
+}
+
+export default function NewsLetters({
+  field,
+  keywords,
+  deliveryPeriod,
+  subscriptionFee,
+}: MyComponentProps) {
   const OutLine = styled.div`
     display: grid;
     justify-items: center;
@@ -50,15 +57,28 @@ export default function NewsLetters() {
   //     margin: 10px 0;
   //   `;
 
-  const [list, setList] = useState<ListProps | null>(null);
+  const [list, setList] = useState<ListProps[] | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetch("http://localhost:8080/newsLetter");
-      setList(await data.json());
+      let url = "http://localhost:8080/newsLetter?";
+      const params = [];
+
+      if (field != "") params.push(`field=${field}`);
+      if (keywords.length != 0) params.push(`keywords=${keywords.join(",")}`);
+      if (deliveryPeriod != "") params.push(`deliveryPeriod=${deliveryPeriod}`);
+      if (subscriptionFee != "")
+        params.push(`subscriptionFee=${subscriptionFee}`);
+      url += params.join("&");
+
+      console.log(url);
+      const data = await fetch(url).then((res) => res.json());
+      console.log(data);
+      setList(data);
     };
     fetchData();
-  }, []);
+  }, [field, keywords, deliveryPeriod, subscriptionFee]);
+
   return (
     <div>
       <TotalDiv>추천 뉴스레터</TotalDiv>

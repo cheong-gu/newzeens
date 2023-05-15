@@ -1,13 +1,28 @@
 import styled from "@emotion/styled";
 import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 
-export default function Filter() {
-  const listRef = useRef<HTMLLIElement>(null);
+interface MyComponentProps {
+  field: string;
+  keywords: string[];
+  deliveryPeriod: string;
+  subscriptionFee: string;
+  setField: React.Dispatch<React.SetStateAction<string>>;
+  setKeywords: React.Dispatch<React.SetStateAction<string[]>>;
+  setDeliveryPeriod: React.Dispatch<React.SetStateAction<string>>;
+  setSubscriptionFee: React.Dispatch<React.SetStateAction<string>>;
+}
 
-  const [field, setField] = useState<string>("");
-  const [keywords, setKeywords] = useState<Array<string>>([]);
-  const [deliveryPeriod, setDeliveryPeriod] = useState<string>("");
-  const [subscriptionFee, setSubscriptionFee] = useState<string>("");
+export default function Filter({
+  field,
+  keywords,
+  deliveryPeriod,
+  subscriptionFee,
+  setField,
+  setKeywords,
+  setDeliveryPeriod,
+  setSubscriptionFee,
+}: MyComponentProps) {
+  const listRef = useRef<HTMLLIElement>(null);
 
   const Container = styled.div`
     margin: 25px 27px;
@@ -72,20 +87,6 @@ export default function Filter() {
 
     setSubscriptionFee(event.currentTarget.innerText);
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      let url = "http://localhost:8080/newsLetter?";
-      if (field != "") url += `field=${field}`;
-      if (keywords.length == 0) url += `keywords=${keywords.join(",")}`;
-      if (deliveryPeriod != "") url += `field=${deliveryPeriod}`;
-      if (subscriptionFee != "") url += `field=${subscriptionFee}`;
-
-      const data = await fetch(url).then((res) => res.json());
-      console.log(data);
-    };
-    fetchData();
-  }, [field, keywords, deliveryPeriod, subscriptionFee]);
 
   return (
     <Container>
