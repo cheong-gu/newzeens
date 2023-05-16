@@ -1,0 +1,73 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    padding-top: 44px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #22293C;
+}
+
+.colored {
+    color: #2141E5;
+    margin-right: 8px;
+}
+
+.suggestion-box {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    margin-top: 52px;
+}
+
+.suggestion-card {
+    display: flex;
+    flex-direction: column;
+    width: 182px;
+    margin-right: 20px;
+}
+
+.suggestion-card:last-of-type {
+    margin-right: 0px;
+}
+
+.suggestion-info {
+    margin-top: 24px;
+}
+
+.suggestion-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #39425A;
+}
+
+.suggestion-publisher {
+    font-size: 14px;
+    font-weight: 500;
+    color: #A2ABC7;
+    margin-left: 4px;
+}
+
+.suggestion-introduction {
+    font-weight: 400;
+    font-size: 15px;
+    color: #565D71;
+
+    margin-top: 8px;
+}
+
+.card-image {
+    width: 182px;
+    height: 182px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+

@@ -19,6 +19,11 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         <title>NEWZEENS</title>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+        />
       </head>
 
       <body>
