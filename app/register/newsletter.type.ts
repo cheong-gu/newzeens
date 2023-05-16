@@ -10,3 +10,7 @@ export type NewsletterFormType = {
   subscribeLink: string;
   mainImage: string;
 };
+
+export interface NewsletterResponseType extends NewsletterFormType {
+  _id: string;
+}

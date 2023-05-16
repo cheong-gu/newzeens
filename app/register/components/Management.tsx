@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback } from "react";
-import { NewsletterFormType } from "../newsletter.type";
+import { NewsletterResponseType } from "../newsletter.type";
 import {
   ListWrapper,
   ListButton,
@@ -15,34 +15,35 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 interface ManagementProps {
-  list: NewsletterFormType[];
+  list: NewsletterResponseType[];
 }
 
 const Management = ({ list }: ManagementProps) => {
   const router = useRouter();
-  const deleteAlert = () => {
-    const deleteAlert = confirm("전체 리스트가 삭제됩니다. 삭제하시겠습니까?");
-    if (deleteAlert) {
-      handleDelete();
-    }
-  };
-  const handleDelete = useCallback(async () => {
-    try {
-      await fetch("http://localhost:8080/newsLetter", {
-        method: "DELETE",
-      }).then((response) => {
-        console.log("[NewsletterContaint/postNewsletter]", { response });
-        router.push("/register");
-      });
-    } catch (e) {
-      console.error(e);
-    }
-  }, [router]);
+
+  const handleDelete = useCallback(
+    async (id: string) => {
+      try {
+        await fetch(`http://localhost:8080/newsLetter/${id}`, {
+          method: "DELETE",
+        }).then((response) => {
+          console.log("[NewsletterContaint/postNewsletter]", { response });
+          router.push("/register");
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    [router]
+  );
   return (
     <>
       {list && list.length > 0 ? (
         list.map(
-          ({ newsletterName, publisher, introduction, mainImage }, index) => (
+          (
+            { _id, newsletterName, publisher, introduction, mainImage },
+            index
+          ) => (
             <ListWrapper key={`${newsletterName}_${index}`}>
               <ListInfo>
                 <Title>{list.length - index}</Title>
@@ -61,7 +62,7 @@ const Management = ({ list }: ManagementProps) => {
                   <Summary>{introduction}</Summary>
                 </InfoBox>
               </ListInfo>
-              <ListButton type="button" onClick={deleteAlert}>
+              <ListButton type="button" onClick={() => handleDelete(_id)}>
                 <Image src="/delete.svg" alt="delete" width={24} height={24} />
               </ListButton>
             </ListWrapper>

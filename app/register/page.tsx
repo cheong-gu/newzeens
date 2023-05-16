@@ -1,6 +1,6 @@
 import React from "react";
 import Management from "./components/Management";
-import { NewsletterFormType } from "./newsletter.type";
+import { NewsletterResponseType } from "./newsletter.type";
 import styles from "./styles.module.css";
 
 const getNewsletterList = async () => {
@@ -10,7 +10,7 @@ const getNewsletterList = async () => {
   if (!res) {
     throw new Error("[RegisterPage/getNewsletterList] Something Wrong...");
   }
-  const data: NewsletterFormType[] = await res.json();
+  const data: NewsletterResponseType[] = await res.json();
   return data;
 };
 
