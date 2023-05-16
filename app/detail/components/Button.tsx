@@ -24,7 +24,8 @@ const StyledButton = styled.button<ButtonStyleProps>`
 
   background: ${({ styleType }) =>
     styleType === "solid" ? "#22293c" : "#fff"};
-  border: 1px solid #22293c;
+  border: ${({ styleType }) =>
+    styleType === "solid" ? "0px" : "1px solid #22293c"};
   border-radius: 10px;
 
   font-size: 20px;
@@ -32,6 +33,11 @@ const StyledButton = styled.button<ButtonStyleProps>`
   color: ${({ styleType }) => (styleType === "solid" ? "#fff" : "#22293c")};
 
   cursor: pointer;
+
+  :hover {
+    background: ${({ styleType }) =>
+      styleType === "solid" ? "#2141E5" : "#F0F3FD"};
+  }
 `;
 
 const Button = ({ styleType, onClick, label }: ButtonProps) => {
