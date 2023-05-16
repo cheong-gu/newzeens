@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./styles/info.module.css";
 import Button from "./Button";
 import Link from "next/link";
+import Chip from "./Chip";
 
 const NewsLetterInfo = () => {
   return (
@@ -16,7 +17,6 @@ const NewsLetterInfo = () => {
       />
       <div className={styles["info-box"]}>
         <div>
-          {" "}
           <h1 className={styles["newsletter-name"]}>
             {MOCK_DATA.newsletterName}
           </h1>
@@ -39,6 +39,12 @@ const NewsLetterInfo = () => {
               </p>
             </div>
           </div>
+        </div>
+        <div className={styles["chip-box"]}>
+          <Chip active label={MOCK_DATA.field} />
+          {MOCK_DATA.keywords.map((value, index) => (
+            <Chip key={`${value}_${index}`} label={value} />
+          ))}
         </div>
         <div className={styles["button-box"]}>
           <Link className={styles["link"]} href={MOCK_DATA.previousIssueLink}>
