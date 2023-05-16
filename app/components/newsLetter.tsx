@@ -4,13 +4,48 @@ import Image from "next/image";
 
 export const NewsLetter = ({ list }: { list: ListProps | null }) => {
   const OutLine = styled.div`
-    display: grid;
+    /* display: grid;
     justify-items: center;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr); */
 
     .grid {
-      margin: 20px;
+      ul {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        /* margin-top: 24px; */
+        li {
+          font-size: 12px;
+          color: var(--primary);
+          border: 1px solid white;
+          border-radius: 4px;
+          background-color: var(--text_gray20);
+          padding: 8px;
+          margin: 10px 0;
+          margin-right: 4px;
+          cursor: pointer;
+
+          :hover {
+            color: var(--primary);
+            background-color: var(--text_gray30);
+          }
+        }
+      }
+
       .title {
+        font-size: 18px;
+        margin-right: 4px;
+      }
+
+      .publisher {
+        font-size: 14px;
+        color: var(--text_gray60);
+      }
+
+      .introduction {
+        margin-top: 8px;
+        font-size: 16px;
+        color: var(--text_gray80);
       }
     }
   `;
@@ -21,9 +56,13 @@ export const NewsLetter = ({ list }: { list: ListProps | null }) => {
   `;
 
   const BtnStyle = styled.button`
+    /* display: flex; */
     font-size: 12px;
     margin: 10px 0;
+    /* padding-right: 12px; */
+    background-color: red;
   `;
+
   console.log(list);
   console.log(list?.publisher);
   console.log(list?.field);
@@ -33,16 +72,20 @@ export const NewsLetter = ({ list }: { list: ListProps | null }) => {
         <ImageStyle>
           <Image src="/body.png" alt="" width={319} height={319} />
         </ImageStyle>
-        <BtnStyle>{list?.field}</BtnStyle>
-        {list?.keywords.map((el, idx) => (
-          <BtnStyle key={idx}>{el}</BtnStyle>
-        ))}
-        <div className="title">
-          <span>{list?.newsletterName}</span>
-          <span>{list?.publisher}</span>
+
+        <ul>
+          <li>{list?.field}</li>
+          {list?.keywords.map((el, idx) => (
+            <li key={idx}>{el}</li>
+          ))}
+        </ul>
+
+        <div>
+          <span className="title">{list?.newsletterName}</span>
+          <span className="publisher">{list?.publisher}</span>
         </div>
 
-        <div>{list?.introduction}</div>
+        <div className="introduction">{list?.introduction}</div>
       </div>
     </OutLine>
   );

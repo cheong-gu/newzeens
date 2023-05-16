@@ -1,4 +1,19 @@
 :root {
+    --primary: #2141E5;
+    --white: #FFFFFF;
+
+    /** 텍스트 컬러 */
+    --text_black: #22293C;
+    --text_gray90: #39425A;
+    --text_gray80: #565D71;
+    --text_gray70: #7C839A;
+    --text_gray60: #9BA4BF;
+    --text_gray50: #B3BBD3;
+    --text_gray40: #C7CEE3;
+    --text_gray30: #DFE4F5;
+    --text_gray20: #F0F3FD;
+    --text_gray10: #F9FAFF;
+
 
 }
 

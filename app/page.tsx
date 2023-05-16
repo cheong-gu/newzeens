@@ -1,7 +1,8 @@
 "use client";
+
 import styled from "@emotion/styled";
 import Banners from "./components/banners";
-import Filter from "./components/filter";
+import Filter from "../components/filter";
 import NewsLetters from "./components/newsLetters";
 import styles from "./styles.module.css";
 import { useState } from "react";

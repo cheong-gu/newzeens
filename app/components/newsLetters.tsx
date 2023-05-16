@@ -32,30 +32,25 @@ export default function NewsLetters({
     display: grid;
     justify-items: center;
     grid-template-columns: repeat(4, 1fr);
+    /* grid-template-rows: repeat(470px 470px 470px); */
 
     .grid {
-      margin: 20px;
+      margin: 10px;
       .title {
       }
     }
   `;
 
   const TotalDiv = styled.div`
+    font-size: 24px;
+    font-weight: 500;
     margin: 30px auto;
     text-align: center;
+
+    span {
+      color: var(--primary);
+    }
   `;
-
-  //   const ImageStyle = styled.div`
-  //     width: 319px;
-  //     height: 319px;
-  //     background-color: red;
-  //     border-radius: 10px;
-  //   `;
-
-  //   const BtnStyle = styled.button`
-  //     font-size: 12px;
-  //     margin: 10px 0;
-  //   `;
 
   const [list, setList] = useState<ListProps[] | null>(null);
 
@@ -81,13 +76,13 @@ export default function NewsLetters({
 
   return (
     <div>
-      <TotalDiv>추천 뉴스레터</TotalDiv>
+      <TotalDiv>
+        추천 뉴스레터 <span>{list?.length}</span>
+      </TotalDiv>
 
       <OutLine>
         {list !== null
-          ? list.map((el: ListProps | null, idx: Key | null | undefined) => (
-              <NewsLetter key={idx} list={el} />
-            ))
+          ? list.map((el, idx) => <NewsLetter key={idx} list={el} />)
           : undefined}
         {/* <NewsLetters list={list} /> */}
       </OutLine>
