@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { Key, useEffect, useState } from "react";
 import { NewsLetter } from "./newsLetter";
+import { TotalDiv } from "./styles/NewsLetters.styles";
+import { OutLine } from "./styles/NewsLetters.styles";
 
 export interface ListProps {
   newsletterName: string;
@@ -28,30 +30,6 @@ export default function NewsLetters({
   deliveryPeriod,
   subscriptionFee,
 }: MyComponentProps) {
-  const OutLine = styled.div`
-    display: grid;
-    justify-items: center;
-    grid-template-columns: repeat(4, 1fr);
-    /* grid-template-rows: repeat(470px 470px 470px); */
-
-    .grid {
-      margin: 10px;
-      .title {
-      }
-    }
-  `;
-
-  const TotalDiv = styled.div`
-    font-size: 24px;
-    font-weight: 500;
-    margin: 30px auto;
-    text-align: center;
-
-    span {
-      color: var(--primary);
-    }
-  `;
-
   const [list, setList] = useState<ListProps[] | null>(null);
 
   useEffect(() => {
@@ -84,7 +62,6 @@ export default function NewsLetters({
         {list !== null
           ? list.map((el, idx) => <NewsLetter key={idx} list={el} />)
           : undefined}
-        {/* <NewsLetters list={list} /> */}
       </OutLine>
     </div>
   );
