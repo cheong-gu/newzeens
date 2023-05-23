@@ -11,7 +11,6 @@ export const BannerStyle = styled.div`
   position: relative !important;
   min-width: 100% !important;
   min-height: 200px !important;
-
   & img {
     object-fit: cover;
   }
@@ -42,9 +41,8 @@ const Banners = () => {
       mousewheel={true}
       navigation={true}
       loop={true}
-      //   autoplay={{ delay: 5000, disableOnInteraction: false }}
-
-      //   scrollbar={{ draggable: true }}
+      autoplay={{ delay: 5000, disableOnInteraction: false }}
+      scrollbar={{ draggable: true }}
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log("slide change")}
     >
