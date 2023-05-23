@@ -11,8 +11,10 @@ export const BannerStyle = styled.div`
   position: relative !important;
   min-width: 100% !important;
   min-height: 200px !important;
-  /* object-fit: cover; */
-  /* top: -10px; */
+
+  & img {
+    object-fit: cover;
+  }
 `;
 
 export const Writter = styled.div`
@@ -30,6 +32,7 @@ export const Writter = styled.div`
     color: var(--text_gray40);
   }
 `;
+
 const Banners = () => {
   return (
     <Swiper
@@ -62,28 +65,3 @@ const Banners = () => {
 };
 
 export default Banners;
-
-{
-  /* <Image
-        className="hello"
-        src={"left1.svg"}
-        alt="left"
-        width={38}
-        height={38}
-      /> */
-}
-
-{
-  /* <div className="bye">
-        
-      </div> */
-}
-{
-  /* <Image
-        className="hello"
-        src={"right1.svg"}
-        alt="left"
-        width={38}
-        height={38}
-      /> */
-}
