@@ -19,7 +19,6 @@ export interface FilterProps {
   el: string;
   field?: string;
   className?: string;
-  ref: React.ForwardedRef<HTMLLIElement>;
   onClick: React.MouseEventHandler<HTMLLIElement>;
 }
 

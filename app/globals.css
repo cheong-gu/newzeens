@@ -31,3 +31,38 @@ body {
     width: 100vw;
     height: 100%;
 }
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    display: none;
+}
+
+.swiper-button-prev {
+    background: url("/left1.svg") no-repeat;
+    background-size: 38px, 38px;
+}
+
+.swiper-button-prev, .swiper-rtl .swiper-button-next {
+    left: var(--swiper-navigation-sides-offset,30px) !important;
+    /* right: auto; */
+    width: 38px !important;
+}
+
+.swiper-button-prev, .swiper-rtl .swiper-button-next:hover {
+    left: var(--swiper-navigation-sides-offset,30px) !important;
+    /* right: auto; */
+    width: 38px !important;
+}
+
+
+
+.swiper-button-next {
+    background: url("/right1.svg") no-repeat;
+    background-size: 38px, 38px;
+}
+
+.swiper-button-next, .swiper-rtl .swiper-button-prev {
+    right:var(--swiper-navigation-sides-offset,30px) !important;
+    /* left: auto; */
+    width: 38px !important;
+}
