@@ -65,10 +65,26 @@ export const ImageStyle = styled.div`
   position: relative;
   width: 319px !important;
   height: 319px !important;
-  .image {
-    border-radius: 10px;
+
+  @keyframes loop {
+    0% {
+      top: 0px;
+    }
+
+    100% {
+      top: -8px;
+    }
   }
 
+  .image {
+    position: relative;
+    border-radius: 10px;
+
+    :hover {
+      animation: loop 0.5s forwards;
+      /* transform */
+    }
+  }
   & img {
     object-fit: cover;
   }
@@ -76,7 +92,6 @@ export const ImageStyle = styled.div`
   ${mediaQuery.xs} {
     width: 152px !important;
     height: 152px !important;
-
     & img {
       object-fit: cover;
     }

@@ -50,9 +50,9 @@ export const Container = styled.div`
 `;
 
 export const FilterStyle = styled.div`
+  margin: 20px 10px;
   .rowStyle {
     color: var(--text_black);
-    margin: 20px 0;
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -65,11 +65,12 @@ export const FilterStyle = styled.div`
     .content {
       ul {
         display: flex;
-
+        margin: 10px 0;
         .modalBtn {
           display: none;
-          position: fixed;
+          position: absolute;
           right: 10px;
+          cursor: pointer;
         }
 
         ${mediaQuery.xs} {

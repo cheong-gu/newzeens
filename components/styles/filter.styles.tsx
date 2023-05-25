@@ -2,12 +2,14 @@ import { mediaQuery } from "@/app/breakpoints";
 import styled from "@emotion/styled";
 
 export const FilterLi = styled.li`
+  margin: 0 4px;
+  padding: 8px 12px;
   &.filter {
     width: max-content;
-    margin: 0 4px;
+
     color: var(--text_gray80);
     background-color: var(--text_gray20);
-    padding: 12px;
+
     border: 1px solid white;
     border-radius: 10px;
     cursor: pointer;
@@ -20,10 +22,9 @@ export const FilterLi = styled.li`
     }
   }
   &.filter_active {
-    margin: 0 4px;
     color: var(--primary);
     background-color: var(--white);
-    padding: 12px;
+
     border: 1px solid var(--primary);
     border-radius: 10px;
     cursor: pointer;
@@ -43,6 +44,5 @@ export const FilterLi = styled.li`
     height: 33px !important;
     display: flex;
     align-items: center;
-    /* writing-mode: vertical; */
   }
 `;
