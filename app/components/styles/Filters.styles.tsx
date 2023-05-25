@@ -65,6 +65,18 @@ export const FilterStyle = styled.div`
     .content {
       ul {
         display: flex;
+
+        .modalBtn {
+          display: none;
+          position: fixed;
+          right: 10px;
+        }
+
+        ${mediaQuery.xs} {
+          .modalBtn {
+            display: inherit;
+          }
+        }
       }
     }
   }

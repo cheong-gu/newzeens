@@ -1,8 +1,16 @@
 import styled from "@emotion/styled";
-import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Container, FilterStyle } from "./styles/Filters.styles";
 import Image from "next/image";
 import Filter from "@/components/filter";
+import { Modal } from "./modal";
 
 export interface MyComponentProps {
   field: string;
@@ -34,7 +42,7 @@ export default function Filters({
   setSubscriptionFee,
 }: MyComponentProps) {
   const listRef = useRef<HTMLLIElement>(null);
-  const [all, setAll] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const arrField: string[] = [
     "라이프스타일",
@@ -68,18 +76,16 @@ export default function Filters({
   ];
   const arrFee: string[] = ["무료", "유료"];
 
-  const ClickField = (event: MouseEvent<HTMLElement>) => {
+  const clickField = (event: MouseEvent<HTMLElement>) => {
     const newText: string = event.currentTarget.innerText;
     if (newText === "전체") {
-      ClickReset();
-      setAll(false);
+      clickReset();
     } else {
       setField(newText == field ? "" : newText);
-      setAll(true);
     }
   };
 
-  const ClickKeywords = (event: MouseEvent<HTMLElement>) => {
+  const clickKeywords = (event: MouseEvent<HTMLElement>) => {
     const data = event.currentTarget.innerText;
 
     const copy = [...keywords];
@@ -92,28 +98,32 @@ export default function Filters({
     }
   };
 
-  const ClickDeliveryPeriod = (event: MouseEvent<HTMLElement>) => {
+  const clickDeliveryPeriod = (event: MouseEvent<HTMLElement>) => {
     const data = event.currentTarget.innerText;
 
     setDeliveryPeriod(data == deliveryPeriod ? "" : data);
   };
 
-  const ClickSubscriptionFee = (event: MouseEvent<HTMLElement>) => {
+  const clickSubscriptionFee = (event: MouseEvent<HTMLElement>) => {
     const data = event.currentTarget.innerText;
 
     setSubscriptionFee(data == subscriptionFee ? "" : data);
   };
 
-  const ClickReset = () => {
+  const clickReset = () => {
     setField("");
     setKeywords([]);
     setDeliveryPeriod("");
     setSubscriptionFee("");
   };
 
+  const clickModal = useCallback(() => {
+    setShowModal(!showModal);
+  }, [showModal]);
+
   return (
     <Container>
-      <div className="reset" onClick={ClickReset}>
+      <div className="reset" onClick={clickReset}>
         <p>필터 초기화</p>
         <Image src="/reset.svg" alt="reset" width={14} height={14}></Image>
       </div>
@@ -129,7 +139,7 @@ export default function Filters({
                 el="전체"
                 className={field ? "filter" : "filter_active"}
                 ref={listRef}
-                onClick={ClickField}
+                onClick={clickField}
               ></Filter>
               {arrField.map((el: string, idx: number) => (
                 <Filter
@@ -138,9 +148,18 @@ export default function Filters({
                   key={idx}
                   className={field === el ? "filter_active" : "filter"}
                   ref={listRef}
-                  onClick={ClickField}
+                  onClick={clickField}
                 ></Filter>
               ))}
+
+              <Image
+                className="modalBtn"
+                src="./modal.svg"
+                alt="modal"
+                width={36}
+                height={36}
+                onClick={clickModal}
+              />
             </ul>
           </div>
         </div>
@@ -161,7 +180,7 @@ export default function Filters({
                       : "filter"
                   }
                   ref={listRef}
-                  onClick={ClickKeywords}
+                  onClick={clickKeywords}
                 ></Filter>
               ))}
             </ul>
@@ -180,7 +199,7 @@ export default function Filters({
                   key={idx}
                   className={deliveryPeriod === el ? "filter_active" : "filter"}
                   ref={listRef}
-                  onClick={ClickDeliveryPeriod}
+                  onClick={clickDeliveryPeriod}
                 ></Filter>
               ))}
             </ul>
@@ -201,13 +220,14 @@ export default function Filters({
                     subscriptionFee === el ? "filter_active" : "filter"
                   }
                   ref={listRef}
-                  onClick={ClickSubscriptionFee}
+                  onClick={clickSubscriptionFee}
                 ></Filter>
               ))}
             </ul>
           </div>
         </div>
       </FilterStyle>
+      {showModal && <Modal clickModal={clickModal}>안녕하세요</Modal>}
     </Container>
   );
 }

@@ -1,6 +1,23 @@
 import { mediaQuery } from "@/app/breakpoints";
 import styled from "@emotion/styled";
 
+export const BannerContainer = styled.div`
+  .swiper-pagination {
+    display: none;
+  }
+  ${mediaQuery.xs} {
+    .swiper-pagination {
+      display: inherit;
+    }
+    .swiper-button-prev {
+      display: none;
+    }
+    .swiper-button-next {
+      display: none;
+    }
+  }
+`;
+
 export const BannerStyle = styled.div`
   position: relative !important;
   min-width: 100% !important;
