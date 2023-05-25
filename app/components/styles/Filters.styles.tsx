@@ -1,3 +1,4 @@
+import { mediaQuery } from "@/app/breakpoints";
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
@@ -35,23 +36,58 @@ export const Container = styled.div`
   }
 
   border-bottom: solid #e6e6e6 1px;
+
+  ${mediaQuery.xs} {
+    overflow: auto;
+    margin: auto;
+    .reset {
+      display: none;
+    }
+    ::-webkit-scrollbar {
+      display: none !important;
+    }
+  }
 `;
 
-export const RowStyle = styled.div`
-  color: var(--text_black);
-  margin: 20px 0;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
+export const FilterStyle = styled.div`
+  .rowStyle {
+    color: var(--text_black);
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 
-  .title {
-    width: 80px;
-    font-weight: 650;
+    .title {
+      width: 80px;
+      font-weight: 650;
+    }
+
+    .content {
+      ul {
+        display: flex;
+      }
+    }
   }
 
-  .content {
-    ul {
-      display: flex;
+  ${mediaQuery.xs} {
+    display: flex;
+
+    .title {
+      display: none;
     }
+    .content {
+      #all {
+        display: inherit;
+      }
+      #keyword,
+      #period,
+      #fee {
+        display: none;
+      }
+    }
+  }
+
+  #all {
+    display: none;
   }
 `;

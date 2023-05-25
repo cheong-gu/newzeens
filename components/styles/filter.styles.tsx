@@ -1,7 +1,9 @@
+import { mediaQuery } from "@/app/breakpoints";
 import styled from "@emotion/styled";
 
 export const FilterLi = styled.li`
   &.filter {
+    width: max-content;
     margin: 0 4px;
     color: var(--text_gray80);
     background-color: var(--text_gray20);
@@ -34,5 +36,13 @@ export const FilterLi = styled.li`
       color: var(--primary);
       background-color: var(--text_gray20);
     }
+  }
+
+  ${mediaQuery.xs} {
+    width: max-content;
+    height: 33px !important;
+    display: flex;
+    align-items: center;
+    /* writing-mode: vertical; */
   }
 `;

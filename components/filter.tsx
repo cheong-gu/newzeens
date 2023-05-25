@@ -1,15 +1,19 @@
-import { FilterProps, MyComponentProps } from "@/app/components/filters";
-import styled from "@emotion/styled";
+import { FilterProps } from "@/app/components/filters";
 import { FilterLi } from "./styles/Filter.styles";
 import { forwardRef } from "react";
 
 const Filter = forwardRef(
   (
-    { el, className, onClick }: FilterProps,
+    { id, el, className, onClick }: FilterProps,
     ref: React.ForwardedRef<HTMLLIElement>
   ) => {
     return (
-      <FilterLi className={className} ref={ref} onClick={onClick}>
+      <FilterLi
+        id={el === "전체" ? "all" : "out"}
+        className={className}
+        ref={ref}
+        onClick={onClick}
+      >
         <a>{el}</a>
       </FilterLi>
     );

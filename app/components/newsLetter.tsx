@@ -8,14 +8,13 @@ export const NewsLetter = ({ list }: { list: ListProps | null }) => {
     <OutLine>
       <div className="grid">
         <ImageStyle>
-          <Image src="/body.png" alt="" width={319} height={319} />
+          <Image className="image" src="/body.png" alt="image" fill />
         </ImageStyle>
-
         <ul>
           <li>{list?.field}</li>
-          {list?.keywords.map((el, idx) => (
+          {/* {list?.keywords.map((el, idx) => (
             <li key={idx}>{el}</li>
-          ))}
+          ))} */}
         </ul>
 
         <div>

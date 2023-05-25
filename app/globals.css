@@ -16,8 +16,8 @@
 
 
     font-family: 'Pretendard';
+    
 }
-
 *,
 *:before,
 *:after {
@@ -64,3 +64,18 @@ body {
     /* left: auto; */
     width: 38px !important;
 }
+
+@media screen and (min-width: 361px) {
+    .swiper-pagination{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .swiper-button-prev{
+        display: none;
+    }
+    .swiper-button-next{
+        display: none;
+    }
+    }
