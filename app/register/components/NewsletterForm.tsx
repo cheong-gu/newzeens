@@ -89,7 +89,6 @@ const NewsletterForm = () => {
     },
     []
   );
-
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.files !== null) {
       const file = event.currentTarget.files[0];
@@ -110,55 +109,74 @@ const NewsletterForm = () => {
     }
   };
 
+  const handleFormSubmit = useCallback(
+    async (body: NewsletterFormType) => {
+      try {
+        const response = await fetch("http://localhost:8080/newsLetter", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log("[NewsletterContaint/postNewsletter]", { result });
+
+          resetData();
+          router.push("/register");
+        } else {
+          alert("입력값이 유효한지 확인해주세요.");
+          console.log(`[NewsletterContaint/postNewsletter] ${response.status}`);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    [resetData, router]
+  );
+
   const handleSubmit = useCallback(
     async (event: React.FormEvent) => {
       event.preventDefault();
       if (
-        formData.mainImage !== null &&
-        formData.newsletterName &&
-        formData.introduction &&
-        formData.publisher &&
-        formData.field
+        !newsletterName ||
+        !publisher ||
+        !introduction ||
+        !subscriptionFee ||
+        !deliveryPeriod ||
+        !field ||
+        !previousIssueLink ||
+        !subscribeLink ||
+        !keywordFormData.keyword2 ||
+        !keywordFormData.keyword3 ||
+        !keywordFormData.keyword4 ||
+        !formData.mainImage
       ) {
-        const body: NewsletterFormType = {
-          ...formData,
-          mainImage: formData.mainImage,
-          keywords: [
-            keywordFormData.keyword2,
-            keywordFormData.keyword3,
-            keywordFormData.keyword4,
-          ],
-        };
-        try {
-          await fetch("http://localhost:8080/newsLetter", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-          }).then(async (response) => {
-            if (response.ok) {
-              const result = await response.json();
-              console.log("[NewsletterContaint/postNewsletter]", { result });
-
-              resetData();
-              router.push(`/register`);
-            } else {
-              // 에러 핸들링
-              // FIXME: 현재 api에서 모든 항목을 입력하게끔 되어있음. UI에서는 필수 항목이 아닌것들도 있음
-              if (response.status === 400) {
-                alert("항목을 모두 입력해주세요.");
-              }
-            }
-          });
-        } catch (e) {
-          console.error(e);
-        }
-      } else {
-        alert("필수 입력 항목을 모두 입력해주세요.");
+        alert("모든 항목을 입력해주세요.");
+        return;
       }
+
+      const body: NewsletterFormType = {
+        ...formData,
+        mainImage: formData.mainImage,
+        keywords: [
+          keywordFormData.keyword2,
+          keywordFormData.keyword3,
+          keywordFormData.keyword4,
+        ],
+      };
+
+      await handleFormSubmit(body);
     },
-    [formData, keywordFormData, resetData, router]
+    [
+      formData,
+      handleFormSubmit,
+      keywordFormData.keyword2,
+      keywordFormData.keyword3,
+      keywordFormData.keyword4,
+    ]
   );
 
   return (
