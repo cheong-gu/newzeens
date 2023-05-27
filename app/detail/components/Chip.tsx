@@ -2,6 +2,7 @@
 
 import styled from "@emotion/styled";
 import React from "react";
+import { mediaQuery } from "../../breakpoints";
 
 const StyledChip = styled.div<ChipStyledProps>`
   padding: 9px 12px;
@@ -12,6 +13,13 @@ const StyledChip = styled.div<ChipStyledProps>`
   font-size: 15px;
   font-weight: 500;
   color: ${({ active }) => (active ? "#2141E5" : "#39425a")};
+
+  ${mediaQuery.sm} {
+    font-size: 13px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
 `;
 
 interface ChipStyledProps {

@@ -27,13 +27,11 @@ const Suggestion = ({ tag }: SuggestionProps) => {
                 width={182}
                 height={182}
               />
-              <div className={styles["suggestion-info"]}>
-                <p className={styles["suggestion-title"]}>
-                  {newsletterName}
-                  <strong className={styles["suggestion-publisher"]}>
-                    {publisher}
-                  </strong>
-                </p>
+              <div>
+                <div className={styles["suggestion-title-box"]}>
+                  <p className={styles["suggestion-title"]}>{newsletterName}</p>
+                  <p className={styles["suggestion-publisher"]}>{publisher}</p>
+                </div>
                 <p className={styles["suggestion-introduction"]}>
                   {introduction}
                 </p>

@@ -1,9 +1,15 @@
 .wrapper {
     padding: 44px 40px;
     margin: 0 auto;
+    @media (max-width: 600px) {
+        padding: 0px;
+    }
 }
 
 .divider {
     margin: 44px 0px;
     border: 1px solid #DFE4F5;
+    @media (max-width: 600px) {
+        margin: 40px 0px;
+    }
 }

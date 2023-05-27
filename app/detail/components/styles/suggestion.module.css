@@ -6,12 +6,19 @@
 
     width: 100%;
     padding-top: 44px;
+    @media (max-width: 600px) {
+        padding-top: 0px;
+        padding-bottom: 96px;
+    }
 }
 
 .title {
     font-size: 24px;
     font-weight: 600;
     color: #22293C;
+    @media (max-width: 600px) {
+        font-size: 18px;
+    }
 }
 
 .colored {
@@ -26,27 +33,45 @@
     justify-content: flex-start;
 
     margin-top: 52px;
+    @media (max-width: 600px) {
+        margin-top: 24px;
+    }
 }
 
 .suggestion-card {
     display: flex;
     flex-direction: column;
     width: 182px;
-    margin-right: 20px;
+    gap: 20px;
+    @media (max-width: 600px) {
+        width: 152px;
+        gap: 16px;
+    }
 }
 
 .suggestion-card:last-of-type {
     margin-right: 0px;
 }
-
-.suggestion-info {
+.suggestion-title-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
     margin-top: 24px;
+    @media (max-width: 600px) {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 16px;
+    }
 }
 
 .suggestion-title {
     font-size: 18px;
     font-weight: 600;
     color: #39425A;
+    @media (max-width: 600px) {
+        font-size: 15px;
+    }
 }
 
 .suggestion-publisher {
@@ -54,6 +79,11 @@
     font-weight: 500;
     color: #A2ABC7;
     margin-left: 4px;
+    @media (max-width: 600px) {
+        font-size: 13px;
+        margin-top: 6px;
+        margin-left: 0px;
+    }
 }
 
 .suggestion-introduction {
@@ -62,6 +92,10 @@
     color: #565D71;
 
     margin-top: 8px;
+
+    @media (max-width: 600px) {
+        font-size: 14px;
+    }
 }
 
 .card-image {
@@ -69,5 +103,9 @@
     height: 182px;
     object-fit: contain;
     border-radius: 10px;
+    @media (max-width: 600px) {
+        width: 152px;
+        height: 152px;
+    }
 }
 
