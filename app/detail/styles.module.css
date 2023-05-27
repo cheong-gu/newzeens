@@ -1,4 +1,6 @@
 .wrapper {
+    max-width: 1280px;
+    width: 100%;
     padding: 44px 40px;
     margin: 0 auto;
     @media (max-width: 600px) {
@@ -7,9 +9,11 @@
 }
 
 .divider {
+    width: 100%;
     margin: 44px 0px;
     border: 1px solid #DFE4F5;
     @media (max-width: 600px) {
-        margin: 40px 0px;
+        width: calc(100% - 40px);
+        margin: 40px 20px;
     }
 }

@@ -40,7 +40,7 @@ const StyledButton = styled.button<ButtonStyleProps>`
       styleType === "solid" ? "#2141E5" : "#F0F3FD"};
   }
 
-  ${mediaQuery.md} {
+  ${mediaQuery.sm} {
     height: 44px;
     font-size: 14px;
     font-weight: 600;
