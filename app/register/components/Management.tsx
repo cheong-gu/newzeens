@@ -47,13 +47,13 @@ const Management = ({ list }: ManagementProps) => {
             <ListWrapper key={`${newsletterName}_${index}`}>
               <ListInfo>
                 <Title>{list.length - index}</Title>
-                {/* <Image
+                <Image
                   src={mainImage}
                   alt={newsletterName}
                   width={48}
                   height={48}
                   style={{ margin: "0px 16px" }}
-                /> */}
+                />
                 <InfoBox>
                   <Title>
                     {newsletterName}

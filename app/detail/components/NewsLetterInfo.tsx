@@ -47,11 +47,14 @@ const NewsLetterInfo = () => {
           ))}
         </div>
         <div className={styles["button-box"]}>
-          <Link className={styles["link"]} href={MOCK_DATA.previousIssueLink}>
+          <Link
+            className={styles["link-outlined"]}
+            href={MOCK_DATA.previousIssueLink}
+          >
             <Button styleType="outlined" label="지난 호 보기" />
           </Link>
           <div className={styles["button-margin"]} />
-          <Link className={styles["link"]} href={MOCK_DATA.subscribeLink}>
+          <Link className={styles["link-solid"]} href={MOCK_DATA.subscribeLink}>
             <Button styleType="solid" label="구독하기" />
           </Link>
         </div>

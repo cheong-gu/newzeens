@@ -2,6 +2,7 @@
 
 import styled from "@emotion/styled";
 import React from "react";
+import { mediaQuery } from "../../breakpoints";
 
 interface ButtonStyleProps {
   styleType: "solid" | "outlined";
@@ -37,6 +38,15 @@ const StyledButton = styled.button<ButtonStyleProps>`
   :hover {
     background: ${({ styleType }) =>
       styleType === "solid" ? "#2141E5" : "#F0F3FD"};
+  }
+
+  ${mediaQuery.md} {
+    height: 44px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 4px;
+    ${({ styleType }) =>
+      styleType === "outlined" ? `width: 104px;` : `width: 100%;`}
   }
 `;
 
