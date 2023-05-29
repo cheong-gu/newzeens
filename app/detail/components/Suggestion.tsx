@@ -40,6 +40,33 @@ const Suggestion = ({ tag }: SuggestionProps) => {
           )
         )}
       </div>
+      {/* <div className={styles["suggestion-box"]}>
+        {MOCK_DATA.map(
+          ({ newsletterName, publisher, introduction, mainImage }, index) => (
+            <div
+              key={`${newsletterName}_${index}`}
+              className={styles["suggestion-card"]}
+            >
+              <Image
+                className={styles["card-image"]}
+                src={mainImage}
+                alt={newsletterName}
+                width={182}
+                height={182}
+              />
+              <div>
+                <div className={styles["suggestion-title-box"]}>
+                  <p className={styles["suggestion-title"]}>{newsletterName}</p>
+                  <p className={styles["suggestion-publisher"]}>{publisher}</p>
+                </div>
+                <p className={styles["suggestion-introduction"]}>
+                  {introduction}
+                </p>
+              </div>
+            </div>
+          )
+        )}
+      </div> */}
     </div>
   );
 };
