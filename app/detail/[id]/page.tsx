@@ -2,28 +2,35 @@ import React from "react";
 import styles from "./styles.module.css";
 import Suggestion from "./components/Suggestion";
 import NewsLetterInfo from "./components/NewsLetterInfo";
-import { NewsletterResponseType } from "../register/newsletter.type";
-
-// FIXME: page.tsx => [id].tsx 파일로 변경
+import { NewsletterResponseType } from "../../register/newsletter.type";
 
 const getFeaturedNewsletter = async (tag: string) => {
   const res = await fetch(`http://localhost:8080/newsLetter?field=${tag}`, {
     next: { revalidate: 0 },
   });
   if (!res) {
-    throw new Error("[RegisterPage/getNewsletterList] Something Wrong...");
+    throw new Error("[DetailPage/getFeaturedNewsletter] Something Wrong...");
   }
   const data: NewsletterResponseType[] = await res.json();
   return data;
 };
 
-const DetailPage = async () => {
-  const featuredList = await getFeaturedNewsletter("마케팅/브랜딩");
+interface DetailPageProps {
+  searchParams: {
+    info: string;
+  };
+}
+
+const DetailPage = async ({ searchParams: { info } }: DetailPageProps) => {
+  const parsedInfo = JSON.parse(
+    decodeURIComponent(info)
+  ) as NewsletterResponseType;
+  const featuredList = await getFeaturedNewsletter(parsedInfo.field);
   return (
     <div className={styles.wrapper}>
-      <NewsLetterInfo />
+      <NewsLetterInfo info={parsedInfo} />
       <div className={styles.divider} />
-      <Suggestion tag="마케팅/브랜딩" list={featuredList} />
+      <Suggestion tag={parsedInfo.field} list={featuredList} />
     </div>
   );
 };

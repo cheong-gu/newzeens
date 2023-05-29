@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles/suggestion.module.css";
 import Image from "next/image";
-import { NewsletterResponseType } from "../../register/newsletter.type";
+import { NewsletterResponseType } from "../../../register/newsletter.type";
 
 interface SuggestionProps {
   tag: string;

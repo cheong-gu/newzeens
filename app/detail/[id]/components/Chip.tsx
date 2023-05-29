@@ -2,7 +2,7 @@
 
 import styled from "@emotion/styled";
 import React from "react";
-import { mediaQuery } from "../../breakpoints";
+import { mediaQuery } from "../../../breakpoints";
 
 const StyledChip = styled.div<ChipStyledProps>`
   height: 36px;
