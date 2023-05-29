@@ -40,6 +40,16 @@ const StyledButton = styled.button<ButtonStyleProps>`
       styleType === "solid" ? "#2141E5" : "#F0F3FD"};
   }
 
+  ${mediaQuery.md} {
+    height: 52px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 10px;
+    max-width: 100%;
+    ${({ styleType }) =>
+      styleType === "outlined" ? `width: 176px;` : `width: 100%;`}
+  }
+
   ${mediaQuery.sm} {
     height: 44px;
     font-size: 14px;

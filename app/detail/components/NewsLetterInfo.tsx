@@ -15,36 +15,40 @@ const NewsLetterInfo = () => {
         width={387}
         height={387}
       />
-      <div className={styles["info-box"]}>
-        <div>
-          <h1 className={styles["newsletter-name"]}>
-            {MOCK_DATA.newsletterName}
-          </h1>
-          <h3 className={styles["publisher"]}>{MOCK_DATA.publisher}</h3>
-          <div className={styles["keyword-box"]}>
-            <div className={styles["keyword-row"]}>
-              <p className={styles["category"]}>소개</p>
-              <p className={styles["explanation"]}>{MOCK_DATA.introduction}</p>
-            </div>
-            <div className={styles["keyword-row"]}>
-              <p className={styles["category"]}>발송 주기</p>
-              <p className={styles["explanation"]}>
-                {MOCK_DATA.deliveryPeriod}
-              </p>
-            </div>
-            <div className={styles["keyword-row"]}>
-              <p className={styles["category"]}>구독비</p>
-              <p className={styles["explanation"]}>
-                {MOCK_DATA.subscriptionFee}
-              </p>
+      <div className={styles["info-button-box"]}>
+        <div className={styles["info-box"]}>
+          <div>
+            <h1 className={styles["newsletter-name"]}>
+              {MOCK_DATA.newsletterName}
+            </h1>
+            <h3 className={styles["publisher"]}>{MOCK_DATA.publisher}</h3>
+            <div className={styles["keyword-box"]}>
+              <div className={styles["keyword-row"]}>
+                <p className={styles["category"]}>소개</p>
+                <p className={styles["explanation"]}>
+                  {MOCK_DATA.introduction}
+                </p>
+              </div>
+              <div className={styles["keyword-row"]}>
+                <p className={styles["category"]}>발송 주기</p>
+                <p className={styles["explanation"]}>
+                  {MOCK_DATA.deliveryPeriod}
+                </p>
+              </div>
+              <div className={styles["keyword-row"]}>
+                <p className={styles["category"]}>구독비</p>
+                <p className={styles["explanation"]}>
+                  {MOCK_DATA.subscriptionFee}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={styles["chip-box"]}>
-          <Chip active label={MOCK_DATA.field} />
-          {MOCK_DATA.keywords.map((value, index) => (
-            <Chip key={`${value}_${index}`} label={value} />
-          ))}
+          <div className={styles["chip-box"]}>
+            <Chip active label={MOCK_DATA.field} />
+            {MOCK_DATA.keywords.map((value, index) => (
+              <Chip key={`${value}_${index}`} label={value} />
+            ))}
+          </div>
         </div>
         <div className={styles["button-box"]}>
           <Link
@@ -53,7 +57,6 @@ const NewsLetterInfo = () => {
           >
             <Button styleType="outlined" label="지난 호 보기" />
           </Link>
-          <div className={styles["button-margin"]} />
           <Link className={styles["link-solid"]} href={MOCK_DATA.subscribeLink}>
             <Button styleType="solid" label="구독하기" />
           </Link>
