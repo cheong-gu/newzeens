@@ -16,14 +16,12 @@ const getFeaturedNewsletter = async (tag: string) => {
 };
 
 interface DetailPageProps {
-  searchParams: {
-    info: string;
-  };
+  params: { params: string[] };
 }
 
-const DetailPage = async ({ searchParams: { info } }: DetailPageProps) => {
+export default async function Page({ params: { params } }: DetailPageProps) {
   const parsedInfo = JSON.parse(
-    decodeURIComponent(info)
+    decodeURIComponent(params[1])
   ) as NewsletterResponseType;
   const featuredList = await getFeaturedNewsletter(parsedInfo.field);
   return (
@@ -33,6 +31,4 @@ const DetailPage = async ({ searchParams: { info } }: DetailPageProps) => {
       <Suggestion tag={parsedInfo.field} list={featuredList} />
     </div>
   );
-};
-
-export default DetailPage;
+}
