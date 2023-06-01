@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./styles/suggestion.module.css";
 import Image from "next/image";
 import { NewsletterResponseType } from "../../../register/newsletter.type";
+import Link from "next/link";
 
 interface SuggestionProps {
   tag: string;
@@ -15,11 +16,15 @@ const Suggestion = ({ tag, list }: SuggestionProps) => {
         <strong className={styles["colored"]}>{tag}</strong>추천 뉴스레터
       </h1>
       <div className={styles["suggestion-box"]}>
-        {list.map(
-          ({ newsletterName, publisher, introduction, mainImage }, index) => (
-            <div
+        {list.map((item, index) => {
+          const { _id, newsletterName, mainImage, publisher, introduction } =
+            item;
+          const encodedURI = encodeURIComponent(JSON.stringify(item));
+          return (
+            <Link
               key={`${newsletterName}_${index}`}
               className={styles["suggestion-card"]}
+              href={`detail/${_id}/${encodedURI}`}
             >
               <Image
                 className={styles["card-image"]}
@@ -37,9 +42,9 @@ const Suggestion = ({ tag, list }: SuggestionProps) => {
                   {introduction}
                 </p>
               </div>
-            </div>
-          )
-        )}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
