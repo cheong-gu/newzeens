@@ -64,3 +64,10 @@ body {
     /* left: auto; */
     width: 38px !important;
 }
+
+a {
+  padding: 0;
+  text-decoration: none;
+  box-shadow: none;
+  outline: none;
+}
