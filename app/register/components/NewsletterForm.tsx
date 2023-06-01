@@ -66,6 +66,7 @@ const NewsletterForm = () => {
 
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const [keywordFormData, setKeywordFormData] = useState(INITIAL_KEYWORD_DATA);
+  const [imageFile, setImageFile] = useState<File>();
   const [imageName, setImageName] = useState("");
 
   const resetData = useCallback(() => {
@@ -89,6 +90,7 @@ const NewsletterForm = () => {
     },
     []
   );
+
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.files !== null) {
       const file = event.currentTarget.files[0];
@@ -101,6 +103,7 @@ const NewsletterForm = () => {
           [name]: reader.result,
         }));
         setImageName(file.name);
+        setImageFile(file);
       };
 
       if (file) {
@@ -108,6 +111,25 @@ const NewsletterForm = () => {
       }
     }
   };
+
+  const handleImageUpload = useCallback(async () => {
+    try {
+      if (!imageFile) {
+        console.log("[NewsletterForm/handleImageUpload] No Image File");
+        return;
+      }
+      const image = new FormData();
+      image.append("file", imageFile);
+
+      const response = await fetch("http://localhost:8080/upload", {
+        method: "POST",
+        body: image,
+      });
+      console.log(response);
+    } catch (e) {
+      console.error(e);
+    }
+  }, [imageFile]);
 
   const handleFormSubmit = useCallback(
     async (body: NewsletterFormType) => {
@@ -167,11 +189,12 @@ const NewsletterForm = () => {
           keywordFormData.keyword4,
         ],
       };
-
+      await handleImageUpload();
       await handleFormSubmit(body);
     },
     [
       formData,
+      handleImageUpload,
       handleFormSubmit,
       keywordFormData.keyword2,
       keywordFormData.keyword3,
