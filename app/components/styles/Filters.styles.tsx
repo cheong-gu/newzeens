@@ -95,15 +95,20 @@ export const FilterStyle = styled.div`
       display: none;
     }
     .content {
-      #all {
-        display: inherit;
+      #all ,#selectedField{
+        display: flex;
       }
+      #field,
       #keyword,
       #period,
       #fee {
         display: none;
       }
     }
+  }
+
+  #selectedField{
+    display: none;
   }
 
   #all {

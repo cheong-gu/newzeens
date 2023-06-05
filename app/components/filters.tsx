@@ -16,10 +16,12 @@ import { ModalContents } from "./modalContents";
 export interface MyComponentProps {
   field: string;
   keywords: string[];
+  selectedField: string[];
   deliveryPeriod: string;
   subscriptionFee: string;
   setField: React.Dispatch<React.SetStateAction<string>>;
   setKeywords: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedField: React.Dispatch<React.SetStateAction<string[]>>;
   setDeliveryPeriod: React.Dispatch<React.SetStateAction<string>>;
   setSubscriptionFee: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -69,7 +71,9 @@ export default function Filters({
   keywords,
   deliveryPeriod,
   subscriptionFee,
+  selectedField,
   setField,
+  setSelectedField,
   setKeywords,
   setDeliveryPeriod,
   setSubscriptionFee,
@@ -78,8 +82,28 @@ export default function Filters({
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalContents, setModalContents] = useState<JSX.Element>(<></>);
 
+
+  useEffect(() => {
+    // 실행할 로직
+    console.log("Selected Field array: ", selectedField);
+  }, [selectedField]);
+
+  const onclickAll = (event: MouseEvent<HTMLElement>)=>{
+    const text: string = event.currentTarget.innerText;
+    if(arrField.includes(text)){
+      clickField(event)
+    } else if(arrKeyword.includes(text)){
+      clickKeywords(event)
+    } else if(arrPeriod.includes(text)){
+      clickDeliveryPeriod(event)
+    } else if(arrFee.includes(text)){
+      clickSubscriptionFee(event)
+    }
+  }
+
   const clickField = (event: MouseEvent<HTMLElement>) => {
     const newText: string = event.currentTarget.innerText;
+    
     if (newText === "전체") {
       clickReset();
     } else {
@@ -149,11 +173,9 @@ export default function Filters({
       </div>
       <FilterStyle>
         <div className="rowStyle">
-          <div className="title">
-            <p>분야</p>
-          </div>
+          <div className="title"></div>
           <div className="content">
-            <ul id="field">
+            <ul id="selectedField">
               <Filter
                 id="all"
                 el="전체"
@@ -161,6 +183,39 @@ export default function Filters({
                 ref={listRef}
                 onClick={clickField}
               ></Filter>
+              {[
+                ...arrField.filter((el) => el === field),
+                ...arrKeyword.filter(el=>keywords.includes(el)),
+                ...arrPeriod.filter((el) => el === deliveryPeriod),
+                ...arrFee.filter((el) => el === subscriptionFee),
+              ].map((el: string, idx: number) => (
+                <Filter
+                  id={el}
+                  el={el}
+                  key={idx}
+                  className={"filter_active"}
+                  ref={listRef}
+                  onClick={onclickAll}
+                ></Filter>
+              ))}
+
+              <Image
+                className="modalBtn"
+                src="./modal.svg"
+                alt="modal"
+                width={36}
+                height={36}
+                onClick={clickModal}
+              />
+            </ul>
+          </div>
+        </div>
+        <div className="rowStyle">
+          <div className="title">
+            <p>분야</p>
+          </div>
+          <div className="content">
+            <ul id="field">
               {arrField.map((el: string, idx: number) => (
                 <Filter
                   id={el}
