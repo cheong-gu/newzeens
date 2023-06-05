@@ -8,7 +8,7 @@ export const OutLine = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
 
-  ${mediaQuery.xs} {
+  ${mediaQuery.sm} {
     max-width: fit-content;
     grid-template-columns: repeat(2, 1fr);
     /* grid-template-rows: repeat(10, 1fr); */
@@ -25,7 +25,7 @@ export const TotalDiv = styled.div`
     color: var(--primary);
   }
 
-  ${mediaQuery.xs} {
+  ${mediaQuery.sm} {
     width: max-content;
   }
 `;

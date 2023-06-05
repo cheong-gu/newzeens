@@ -11,6 +11,7 @@ import { Container, FilterStyle } from "./styles/Filters.styles";
 import Image from "next/image";
 import Filter from "@/components/filter";
 import { Modal } from "./modal";
+import { ModalContents } from "./modalContents";
 
 export interface MyComponentProps {
   field: string;
@@ -31,6 +32,38 @@ export interface FilterProps {
   onClick: React.MouseEventHandler<HTMLLIElement>;
 }
 
+export const arrField: string[] = [
+  "라이프스타일",
+  "IT",
+  "인문/저널리즘",
+  "트렌드",
+  "경제/시사/정치",
+  "마케팅/브랜드",
+  "디자인",
+];
+
+export const arrKeyword: string[] = [
+  "마케터",
+  "개발자",
+  "디자이너",
+  "누구나",
+  "사례 및 업계소식",
+  "투자/상식",
+  "취미/취향",
+  "일상",
+  "믿을 수 있는 글",
+  "발 빠른 정보",
+];
+export const arrPeriod: string[] = [
+  "매일",
+  "주 1회",
+  "주 2회 이상",
+  "월 1회",
+  "월 2회 이상",
+  "무작위",
+];
+export const arrFee: string[] = ["무료", "유료"];
+
 export default function Filters({
   field,
   keywords,
@@ -43,38 +76,7 @@ export default function Filters({
 }: MyComponentProps) {
   const listRef = useRef<HTMLLIElement>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
-
-  const arrField: string[] = [
-    "라이프스타일",
-    "IT",
-    "인문/저널리즘",
-    "트렌드",
-    "경제/시사/정치",
-    "마케팅/브랜드",
-    "디자인",
-  ];
-
-  const arrKeyword: string[] = [
-    "마케터",
-    "개발자",
-    "디자이너",
-    "누구나",
-    "사례 및 업계소식",
-    "투자/상식",
-    "취미/취향",
-    "일상",
-    "믿을 수 있는 글",
-    "발 빠른 정보",
-  ];
-  const arrPeriod: string[] = [
-    "매일",
-    "주 1회",
-    "주 2회 이상",
-    "월 1회",
-    "월 2회 이상",
-    "무작위",
-  ];
-  const arrFee: string[] = ["무료", "유료"];
+  const [modalContents, setModalContents] = useState<JSX.Element>(<></>);
 
   const clickField = (event: MouseEvent<HTMLElement>) => {
     const newText: string = event.currentTarget.innerText;
@@ -119,6 +121,24 @@ export default function Filters({
 
   const clickModal = useCallback(() => {
     setShowModal(!showModal);
+    setModalContents(
+      <ModalContents
+        field={field}
+        keywords={keywords}
+        deliveryPeriod={deliveryPeriod}
+        subscriptionFee={subscriptionFee}
+        clickField={clickField}
+        clickKeywords={clickKeywords}
+        clickDeliveryPeriod={clickDeliveryPeriod}
+        clickSubscriptionFee={clickSubscriptionFee}
+        clickReset={clickReset}
+        onClick={function (
+          event: MouseEvent<HTMLLIElement, globalThis.MouseEvent>
+        ): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
+    );
   }, [showModal]);
 
   return (
@@ -227,7 +247,7 @@ export default function Filters({
           </div>
         </div>
       </FilterStyle>
-      {showModal && <Modal clickModal={clickModal}>안녕하세요</Modal>}
+      {showModal && <Modal clickModal={clickModal}>{modalContents}</Modal>}
     </Container>
   );
 }

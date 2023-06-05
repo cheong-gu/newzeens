@@ -9,9 +9,6 @@ export const Container = styled.div`
     cursor: pointer;
     width: fit-content;
     border-bottom: 1px solid var(--text_black);
-    p {
-      margin-right: 4px;
-    }
 
     @keyframes lotate {
       0% {
@@ -26,10 +23,20 @@ export const Container = styled.div`
         transform: rotate(360deg);
       }
     }
+    P {
+      margin-right: 4px;
+      line-height: 1;
+    }
 
+    p:hover + Img {
+      animation-name: lotate; /* lotate 라는 이름의 키프레임 애니메이션을 */
+      animation-duration: 1.5s; /* 1.5초 동안 재생하며, */
+      animation-iteration-count: infinite; /* 애니메이션을 무한 반복하고, */
+      animation-timing-function: linear; /* 선형으로 재생합니다. */
+    }
     Img:hover {
       animation-name: lotate; /* lotate 라는 이름의 키프레임 애니메이션을 */
-      animation-duration: 1.5s; /* 3초 동안 재생하며, */
+      animation-duration: 1.5s; /* 1.5초 동안 재생하며, */
       animation-iteration-count: infinite; /* 애니메이션을 무한 반복하고, */
       animation-timing-function: linear; /* 선형으로 재생합니다. */
     }
@@ -37,7 +44,7 @@ export const Container = styled.div`
 
   border-bottom: solid #e6e6e6 1px;
 
-  ${mediaQuery.xs} {
+  ${mediaQuery.sm} {
     overflow: auto;
     margin: auto;
     .reset {
@@ -58,7 +65,7 @@ export const FilterStyle = styled.div`
     flex-direction: row;
 
     .title {
-      width: 80px;
+      min-width: 80px;
       font-weight: 650;
     }
 
@@ -73,7 +80,7 @@ export const FilterStyle = styled.div`
           cursor: pointer;
         }
 
-        ${mediaQuery.xs} {
+        ${mediaQuery.sm} {
           .modalBtn {
             display: inherit;
           }
@@ -82,9 +89,8 @@ export const FilterStyle = styled.div`
     }
   }
 
-  ${mediaQuery.xs} {
+  ${mediaQuery.sm} {
     display: flex;
-
     .title {
       display: none;
     }

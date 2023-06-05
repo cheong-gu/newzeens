@@ -24,7 +24,7 @@ export const OutLine = styled.div`
         /* margin-right: 4px; */
         cursor: pointer;
 
-        ${mediaQuery.xs} {
+        ${mediaQuery.sm} {
           padding: 6px 8px;
         }
 
@@ -57,7 +57,7 @@ export const OutLine = styled.div`
     }
   }
 
-  ${mediaQuery.xs} {
+  ${mediaQuery.sm} {
   }
 `;
 
@@ -89,7 +89,7 @@ export const ImageStyle = styled.div`
     object-fit: cover;
   }
 
-  ${mediaQuery.xs} {
+  ${mediaQuery.sm} {
     width: 152px !important;
     height: 152px !important;
     & img {
