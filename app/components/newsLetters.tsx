@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Key, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { NewsLetter } from "./newsLetter";
 import { TotalDiv } from "./styles/NewsLetters.styles";
 import { OutLine } from "./styles/NewsLetters.styles";
@@ -31,18 +31,20 @@ export default function NewsLetters({
   subscriptionFee,
 }: MyComponentProps) {
   const [list, setList] = useState<ListProps[] | null>(null);
-  const [totalLength, setTotalLength] = useState(0);
-  const [page, setPage] = useState(1);
+  const [totalLength, setTotalLength] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+  const handleBottomReached = useCallback(() => {
+    setPage((prev) => {
+      if (prev < Math.floor(totalLength / 20) + 1) {
+        return prev + 1;
+      } else {
+        return prev;
+      }
+    });
   }, [totalLength]);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const scrollTop = document.documentElement.scrollTop;
     const windowHeight = window.innerHeight;
     const fullHeight = document.documentElement.scrollHeight;
@@ -50,19 +52,17 @@ export default function NewsLetters({
     if (windowHeight + scrollTop >= fullHeight) {
       handleBottomReached();
     }
-  };
+  }, [handleBottomReached]);
 
-  const handleBottomReached = () => {
-    setPage((prev) => {
-      if (prev < (Math.floor(totalLength / 20) + 1)) {
-        return prev + 1;
-      } else {
-        return prev;
-      }
-    });
-  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-  const fetchData = async () => {
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll, totalLength]);
+
+  const fetchData = useCallback(async () => {
     let url = "http://localhost:8080/newsLetter?";
     const params = [];
 
@@ -77,17 +77,17 @@ export default function NewsLetters({
 
     console.log(url);
     const data = await fetch(url).then((res) => res.json());
-
-    const list = data.data;
+    console.log(data);
+    const list = data;
     const totalLength = data.totalLength;
     setTotalLength(totalLength);
 
     setList((prev) => [...(prev ?? []), ...list]);
-  };
+  }, [deliveryPeriod, field, keywords, page, subscriptionFee]);
 
   useEffect(() => {
     fetchData();
-  }, [field, keywords, deliveryPeriod, subscriptionFee, page]);
+  }, [field, keywords, deliveryPeriod, subscriptionFee, page, fetchData]);
 
   return (
     <div>

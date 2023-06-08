@@ -95,7 +95,8 @@ export const FilterStyle = styled.div`
       display: none;
     }
     .content {
-      #all ,#selectedField{
+      #all,
+      #selectedField {
         display: flex;
       }
       #field,
@@ -107,8 +108,9 @@ export const FilterStyle = styled.div`
     }
   }
 
-  #selectedField{
+  #selectedField {
     display: none;
+    align-items: center;
   }
 
   #all {

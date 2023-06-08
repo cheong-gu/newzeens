@@ -40,13 +40,6 @@ export const ModalContents = ({
           </div>
           <div className="content">
             <ul id="field">
-              <Filter
-                id="all"
-                el="전체"
-                className={field ? "filter" : "filter_active"}
-                ref={listRef}
-                onClick={clickField}
-              ></Filter>
               {arrField.map((el: string, idx: number) => (
                 <Filter
                   id={el}

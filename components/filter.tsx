@@ -20,4 +20,6 @@ const Filter = forwardRef(
   }
 );
 
+Filter.displayName = "Filter";
+
 export default Filter;

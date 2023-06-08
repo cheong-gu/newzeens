@@ -82,28 +82,27 @@ export default function Filters({
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalContents, setModalContents] = useState<JSX.Element>(<></>);
 
-
   useEffect(() => {
     // 실행할 로직
     console.log("Selected Field array: ", selectedField);
   }, [selectedField]);
 
-  const onclickAll = (event: MouseEvent<HTMLElement>)=>{
+  const onclickAll = (event: MouseEvent<HTMLElement>) => {
     const text: string = event.currentTarget.innerText;
-    if(arrField.includes(text)){
-      clickField(event)
-    } else if(arrKeyword.includes(text)){
-      clickKeywords(event)
-    } else if(arrPeriod.includes(text)){
-      clickDeliveryPeriod(event)
-    } else if(arrFee.includes(text)){
-      clickSubscriptionFee(event)
+    if (arrField.includes(text)) {
+      clickField(event);
+    } else if (arrKeyword.includes(text)) {
+      clickKeywords(event);
+    } else if (arrPeriod.includes(text)) {
+      clickDeliveryPeriod(event);
+    } else if (arrFee.includes(text)) {
+      clickSubscriptionFee(event);
     }
-  }
+  };
 
   const clickField = (event: MouseEvent<HTMLElement>) => {
     const newText: string = event.currentTarget.innerText;
-    
+
     if (newText === "전체") {
       clickReset();
     } else {
@@ -116,6 +115,7 @@ export default function Filters({
 
     const copy = [...keywords];
 
+    console.log(field);
     if (keywords.includes(data)) {
       const result = copy.filter((el) => el !== data);
       setKeywords(result);
@@ -126,13 +126,11 @@ export default function Filters({
 
   const clickDeliveryPeriod = (event: MouseEvent<HTMLElement>) => {
     const data = event.currentTarget.innerText;
-
     setDeliveryPeriod(data == deliveryPeriod ? "" : data);
   };
 
   const clickSubscriptionFee = (event: MouseEvent<HTMLElement>) => {
     const data = event.currentTarget.innerText;
-
     setSubscriptionFee(data == subscriptionFee ? "" : data);
   };
 
@@ -179,25 +177,61 @@ export default function Filters({
               <Filter
                 id="all"
                 el="전체"
-                className={field ? "filter" : "filter_active"}
+                className={
+                  [
+                    ...arrField.filter((el) => el === field),
+                    ...arrKeyword.filter((el) => keywords.includes(el)),
+                    ...arrPeriod.filter((el) => el === deliveryPeriod),
+                    ...arrFee.filter((el) => el === subscriptionFee),
+                  ].length === 0
+                    ? "filter_active"
+                    : "filter"
+                }
                 ref={listRef}
                 onClick={clickField}
               ></Filter>
               {[
                 ...arrField.filter((el) => el === field),
-                ...arrKeyword.filter(el=>keywords.includes(el)),
+                ...arrKeyword.filter((el) => keywords.includes(el)),
                 ...arrPeriod.filter((el) => el === deliveryPeriod),
                 ...arrFee.filter((el) => el === subscriptionFee),
-              ].map((el: string, idx: number) => (
-                <Filter
-                  id={el}
-                  el={el}
-                  key={idx}
-                  className={"filter_active"}
-                  ref={listRef}
-                  onClick={onclickAll}
-                ></Filter>
-              ))}
+              ].length === 0 ? (
+                <div className="rowStyle">
+                  <div className="title">
+                    <p>분야</p>
+                  </div>
+                  <div className="content">
+                    <ul id="mobileField">
+                      {arrField.map((el: string, idx: number) => (
+                        <Filter
+                          id={el}
+                          el={el}
+                          key={idx}
+                          className={field === el ? "filter_active" : "filter"}
+                          ref={listRef}
+                          onClick={clickField}
+                        ></Filter>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ) : (
+                [
+                  ...arrField.filter((el) => el === field),
+                  ...arrKeyword.filter((el) => keywords.includes(el)),
+                  ...arrPeriod.filter((el) => el === deliveryPeriod),
+                  ...arrFee.filter((el) => el === subscriptionFee),
+                ].map((el: string, idx: number) => (
+                  <Filter
+                    id={el}
+                    el={el}
+                    key={idx}
+                    className={"filter_active"}
+                    ref={listRef}
+                    onClick={onclickAll}
+                  ></Filter>
+                ))
+              )}
 
               <Image
                 className="modalBtn"
