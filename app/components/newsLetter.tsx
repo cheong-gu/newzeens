@@ -17,7 +17,7 @@ export const NewsLetter = ({ list }: { list: ListProps | null }) => {
           ))} */}
         </ul>
 
-        <div>
+        <div className="titleDiv">
           <span className="title">{list?.newsletterName}</span>
           <span className="publisher">{list?.publisher}</span>
         </div>

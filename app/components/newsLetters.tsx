@@ -78,7 +78,7 @@ export default function NewsLetters({
     console.log(url);
     const data = await fetch(url).then((res) => res.json());
     console.log(data);
-    const list = data;
+    const list = data.data;
     const totalLength = data.totalLength;
     setTotalLength(totalLength);
 

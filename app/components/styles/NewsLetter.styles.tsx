@@ -4,14 +4,9 @@ import styled from "@emotion/styled";
 export const OutLine = styled.div`
   .grid {
     position: relative;
+    display: flex;
+    flex-direction: column;
     ul {
-      position: relative;
-      width: 152px;
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      overflow: auto;
-
       li {
         width: max-content;
         font-size: 12px;
@@ -35,36 +30,54 @@ export const OutLine = styled.div`
       }
     }
 
-    .title {
-      position: relative;
-      font-size: 18px;
-      margin-right: 4px;
-    }
+    .titleDiv {
+      display: flex;
+      ${mediaQuery.sm} {
+        flex-direction: column;
+      }
 
-    .publisher {
-      position: relative;
+      .title {
+        line-height: 1;
+        font-size: 18px;
+        margin-right: 4px;
+      }
 
-      font-size: 14px;
-      color: var(--text_gray60);
+      .publisher {
+        position: relative;
+
+        font-size: 14px;
+        color: var(--text_gray60);
+
+        ${mediaQuery.sm} {
+          margin-top: 4px;
+        }
+      }
     }
 
     .introduction {
       position: relative;
-
-      margin-top: 8px;
+      max-width: 284px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-all;
+      margin: 8px 0;
       font-size: 16px;
       color: var(--text_gray80);
-    }
-  }
 
-  ${mediaQuery.sm} {
+      ${mediaQuery.sm} {
+        max-width: 152px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-all;
+      }
+    }
   }
 `;
 
 export const ImageStyle = styled.div`
   position: relative;
-  width: 319px !important;
-  height: 319px !important;
+  width: 284px !important;
+  height: 284px !important;
 
   @keyframes loop {
     0% {
@@ -90,8 +103,8 @@ export const ImageStyle = styled.div`
   }
 
   ${mediaQuery.sm} {
-    width: 152px !important;
-    height: 152px !important;
+    max-width: 152px !important;
+    max-height: 152px !important;
     & img {
       object-fit: cover;
     }

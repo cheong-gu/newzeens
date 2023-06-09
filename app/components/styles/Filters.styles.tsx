@@ -2,7 +2,7 @@ import { mediaQuery } from "@/app/breakpoints";
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
-  margin: 25px 27px;
+  margin: 40px;
   .reset {
     color: var(--text_black);
     display: flex;
@@ -58,11 +58,12 @@ export const Container = styled.div`
 
 export const FilterStyle = styled.div`
   margin: 20px 10px;
+  /* display: grid; */
   .rowStyle {
     color: var(--text_black);
     display: flex;
-    align-items: center;
     flex-direction: row;
+    align-items: center;
 
     .title {
       min-width: 80px;
@@ -72,6 +73,8 @@ export const FilterStyle = styled.div`
     .content {
       ul {
         display: flex;
+        /* display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(auto, auto)); */
         margin: 10px 0;
         .modalBtn {
           display: none;
