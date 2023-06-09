@@ -1,8 +1,9 @@
-import styled from "@emotion/styled";
 import { useCallback, useEffect, useState } from "react";
 import { NewsLetter } from "./newsLetter";
 import { TotalDiv } from "./styles/NewsLetters.styles";
 import { OutLine } from "./styles/NewsLetters.styles";
+import { Player } from "@lottiefiles/react-lottie-player";
+import loading from "../../public/loading.json";
 
 export interface ListProps {
   newsletterName: string;
@@ -95,11 +96,22 @@ export default function NewsLetters({
         추천 뉴스레터 <span>{totalLength}</span>
       </TotalDiv>
 
-      <OutLine>
-        {list !== null
-          ? list.map((el, idx) => <NewsLetter key={idx} list={el} />)
-          : undefined}
-      </OutLine>
+      {list !== null ? (
+        <OutLine>
+          {list.map((el, idx) => (
+            <NewsLetter key={idx} list={el} />
+          ))}
+        </OutLine>
+      ) : (
+        <div id="indicator">
+          <Player
+            autoplay
+            loop
+            src={loading}
+            style={{ width: 144, height: 105 }}
+          />
+        </div>
+      )}
     </div>
   );
 }
