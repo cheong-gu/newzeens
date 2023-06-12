@@ -64,17 +64,3 @@ const NewsLetterInfo = ({ info }: NewsLetterInfoProps) => {
 };
 
 export default NewsLetterInfo;
-
-const MOCK_DATA = {
-  newsletterName: "돌멩이레터",
-  publisher: "슬로워크",
-  introduction: "분명한 철학이 있는 브랜드를 소개하는 뉴스레터",
-  subscriptionFee: "무료",
-  field: "마케팅/브랜딩",
-  keywords: ["기획자", "인사이트", "라이프스타일"],
-  deliveryPeriod: "주 1회",
-  previousIssueLink: "https://github.com/cheong-gu/newzeens",
-  subscribeLink: "https://github.com/cheong-gu/newzeens",
-  mainImage:
-    "https://velog.velcdn.com/images/gparkkii/profile/b16e4ab2-0ff9-458f-95c1-7c8de584dae8/gparkkii's_zepeto.jpeg",
-};
