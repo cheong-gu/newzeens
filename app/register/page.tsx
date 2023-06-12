@@ -10,8 +10,8 @@ const getNewsletterList = async () => {
   if (!res) {
     throw new Error("[RegisterPage/getNewsletterList] Something Wrong...");
   }
-  const data: NewsletterResponseType[] = await res.json();
-  return data;
+  const { data } = await res.json();
+  return data as NewsletterResponseType[];
 };
 
 const RegisterPage = async () => {
