@@ -15,15 +15,50 @@ const getCurrentNewsletter = async (id: string) => {
   return data as NewsletterResponseType;
 };
 
-const getFeaturedNewsletter = async (tag: string) => {
-  const res = await fetch(`http://localhost:8080/newsLetter?field=${tag}`, {
-    next: { revalidate: 0 },
-  });
-  if (!res) {
-    throw new Error("[DetailPage/getFeaturedNewsletter] Something Wrong...");
+const getFeaturedNewsletter = async (
+  tag: string
+): Promise<NewsletterResponseType[]> => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/newsLetter?field=${tag}`,
+      {
+        next: { revalidate: 0 },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Something went wrong...");
+    }
+
+    const { data }: { data: NewsletterResponseType[] } = await response.json();
+    const shuffledArray = shuffleArray(data);
+    const selectedData = shuffledArray.slice(0, 6);
+
+    return selectedData;
+  } catch (error) {
+    throw new Error(`[DetailPage/getFeaturedNewsletter] ${error}`);
   }
-  const { data } = await res.json();
-  return data as NewsletterResponseType[];
+};
+
+const shuffleArray = (
+  array: NewsletterResponseType[]
+): NewsletterResponseType[] => {
+  const shuffled = [...array];
+
+  for (
+    let currentIndex = shuffled.length - 1;
+    currentIndex > 0;
+    currentIndex--
+  ) {
+    const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
+
+    [shuffled[currentIndex], shuffled[randomIndex]] = [
+      shuffled[randomIndex],
+      shuffled[currentIndex],
+    ];
+  }
+
+  return shuffled;
 };
 
 interface DetailPageProps {
@@ -33,6 +68,7 @@ interface DetailPageProps {
 export default async function Page({ params: { params } }: DetailPageProps) {
   const newsletterInfo = await getCurrentNewsletter(params);
   const featuredList = await getFeaturedNewsletter(newsletterInfo.field);
+
   return (
     <div className={styles.wrapper}>
       <NewsLetterInfo info={newsletterInfo} />
