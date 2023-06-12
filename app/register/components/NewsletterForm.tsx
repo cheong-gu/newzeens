@@ -112,56 +112,38 @@ const NewsletterForm = () => {
     }
   };
 
-  const handleImageUpload = useCallback(async () => {
+  const handleImageUpload = useCallback(async (): Promise<string | null> => {
+    if (!imageFile) {
+      console.log("[NewsletterForm/handleImageUpload] No Image File");
+      return null;
+    }
+
     try {
-      if (!imageFile) {
-        console.log("[NewsletterForm/handleImageUpload] No Image File");
-        return;
-      }
-      const image = new FormData();
-      image.append("file", imageFile);
+      const formData = new FormData();
+      formData.append("file", imageFile);
 
       const response = await fetch("http://localhost:8080/upload", {
         method: "POST",
-        body: image,
+        body: formData,
       });
-      console.log(response);
-    } catch (e) {
-      console.error(e);
+
+      if (!response.ok) {
+        console.log("[NewsletterForm/handleImageUpload] Image Upload Failed");
+        return null;
+      }
+
+      const { filePath } = await response.json();
+      return filePath;
+    } catch (error) {
+      console.error(error);
+      return null;
     }
   }, [imageFile]);
-
-  const handleFormSubmit = useCallback(
-    async (body: NewsletterFormType) => {
-      try {
-        const response = await fetch("http://localhost:8080/newsLetter", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        });
-
-        if (response.ok) {
-          const result = await response.json();
-          console.log("[NewsletterContaint/postNewsletter]", { result });
-
-          resetData();
-          router.push("/register");
-        } else {
-          alert("입력값이 유효한지 확인해주세요.");
-          console.log(`[NewsletterContaint/postNewsletter] ${response.status}`);
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    },
-    [resetData, router]
-  );
 
   const handleSubmit = useCallback(
     async (event: React.FormEvent) => {
       event.preventDefault();
+
       if (
         !newsletterName ||
         !publisher ||
@@ -189,13 +171,41 @@ const NewsletterForm = () => {
           keywordFormData.keyword4,
         ],
       };
-      await handleImageUpload();
-      await handleFormSubmit(body);
+
+      const imagePath = await handleImageUpload();
+
+      if (imagePath !== null) {
+        try {
+          const response = await fetch("http://localhost:8080/newsLetter", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          });
+
+          if (!response.ok) {
+            alert("입력값이 유효한지 확인해주세요.");
+            return;
+          }
+
+          const result = await response.json();
+          console.log("[NewsletterContaint/postNewsletter]", { result });
+
+          resetData();
+          router.push("/register");
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        alert("이미지 파일이 유효한지 확인해주세요.");
+      }
     },
     [
       formData,
       handleImageUpload,
-      handleFormSubmit,
+      resetData,
+      router,
       keywordFormData.keyword2,
       keywordFormData.keyword3,
       keywordFormData.keyword4,
