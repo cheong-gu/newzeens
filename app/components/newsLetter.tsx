@@ -10,10 +10,9 @@ export const NewsLetter = ({
 }: {
   list: NewsletterResponseType | null;
 }) => {
-  const encodedURI = encodeURIComponent(JSON.stringify(list));
   return (
     <OutLine>
-      <Link href={`detail/${list?._id}/${encodedURI}`}>
+      <Link href={`detail/${list?._id}`}>
         <div className="grid">
           <ImageStyle>
             <Image className="image" src="/body.png" alt="image" fill />
