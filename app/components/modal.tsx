@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from "react";
 import { mediaQuery } from "../breakpoints";
 
 interface ModalDefaultType {
-  clickModal: () => void;
+  backDrop: () => void;
 }
 
 const ModalContainer = styled.div`
@@ -29,14 +29,6 @@ const DialogBox = styled.dialog`
     animation-delay: 0s;
     animation-fill-mode: forwards;
 
-    @keyframes dropdown {
-      from {
-        top: -50%;
-      }
-      to {
-        top: 0%;
-      }
-    }
   }
 `;
 
@@ -52,7 +44,7 @@ const Backdrop = styled.div`
 `;
 
 export const Modal = ({
-  clickModal,
+  backDrop,
   children,
 }: PropsWithChildren<ModalDefaultType>) => {
   {
@@ -62,9 +54,9 @@ export const Modal = ({
         <Backdrop
           onClick={(e: React.MouseEvent) => {
             e.preventDefault();
-
-            if (clickModal) {
-              clickModal();
+            console.log('test');
+            if (backDrop) {
+              backDrop();
             }
           }}
         />

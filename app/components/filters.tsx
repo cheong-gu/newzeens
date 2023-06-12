@@ -19,6 +19,8 @@ export interface MyComponentProps {
   selectedField: string[];
   deliveryPeriod: string;
   subscriptionFee: string;
+  showModal: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   setField: React.Dispatch<React.SetStateAction<string>>;
   setKeywords: React.Dispatch<React.SetStateAction<string[]>>;
   setSelectedField: React.Dispatch<React.SetStateAction<string[]>>;
@@ -72,6 +74,8 @@ export default function Filters({
   deliveryPeriod,
   subscriptionFee,
   selectedField,
+  showModal,
+  setShowModal,
   setField,
   setSelectedField,
   setKeywords,
@@ -79,7 +83,6 @@ export default function Filters({
   setSubscriptionFee,
 }: MyComponentProps) {
   const listRef = useRef<HTMLLIElement>(null);
-  const [showModal, setShowModal] = useState<boolean>(false);
   const [modalContents, setModalContents] = useState<JSX.Element>(<></>);
 
   useEffect(() => {
@@ -141,27 +144,17 @@ export default function Filters({
     setSubscriptionFee("");
   };
 
-  const clickModal = useCallback(() => {
-    setShowModal(!showModal);
-    setModalContents(
-      <ModalContents
-        field={field}
-        keywords={keywords}
-        deliveryPeriod={deliveryPeriod}
-        subscriptionFee={subscriptionFee}
-        clickField={clickField}
-        clickKeywords={clickKeywords}
-        clickDeliveryPeriod={clickDeliveryPeriod}
-        clickSubscriptionFee={clickSubscriptionFee}
-        clickReset={clickReset}
-        onClick={function (
-          event: MouseEvent<HTMLLIElement, globalThis.MouseEvent>
-        ): void {
-          throw new Error("Function not implemented.");
-        }}
-      />
-    );
-  }, [showModal]);
+  const openModal = useCallback(() => {
+    setShowModal(true);
+  }, [showModal])
+
+  const closeModal = useCallback(() => {
+    setShowModal(false);
+  }, [showModal])
+
+  const clickModalBtn = () => {
+    openModal();
+  }
 
   return (
     <Container>
@@ -232,14 +225,13 @@ export default function Filters({
                   ></Filter>
                 ))
               )}
-
               <Image
                 className="modalBtn"
                 src="./modal.svg"
                 alt="modal"
                 width={36}
                 height={36}
-                onClick={clickModal}
+                onClick={clickModalBtn}
               />
             </ul>
           </div>
@@ -260,15 +252,6 @@ export default function Filters({
                   onClick={clickField}
                 ></Filter>
               ))}
-
-              <Image
-                className="modalBtn"
-                src="./modal.svg"
-                alt="modal"
-                width={36}
-                height={36}
-                onClick={clickModal}
-              />
             </ul>
           </div>
         </div>
@@ -336,7 +319,22 @@ export default function Filters({
           </div>
         </div>
       </FilterStyle>
-      {showModal && <Modal clickModal={clickModal}>{modalContents}</Modal>}
+      {showModal && <Modal backDrop={closeModal}> <ModalContents
+        field={field}
+        keywords={keywords}
+        deliveryPeriod={deliveryPeriod}
+        subscriptionFee={subscriptionFee}
+        clickField={clickField}
+        clickKeywords={clickKeywords}
+        clickDeliveryPeriod={clickDeliveryPeriod}
+        clickSubscriptionFee={clickSubscriptionFee}
+        clickReset={clickReset}
+        onClick={function (
+          event: MouseEvent<HTMLLIElement, globalThis.MouseEvent>
+        ): void {
+          throw new Error("Function not implemented.");
+        }}
+      /></Modal>}
     </Container>
   );
 }

@@ -9,6 +9,7 @@ import { useState } from "react";
 export default function Home() {
   const ContainerStyle = styled.div``;
 
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [field, setField] = useState<string>("");
   const [keywords, setKeywords] = useState<Array<string>>([]);
   const [deliveryPeriod, setDeliveryPeriod] = useState<string>("");
@@ -20,6 +21,8 @@ export default function Home() {
     <ContainerStyle>
       <Banners></Banners>
       <Filters
+        showModal = {showModal}
+        setShowModal = {setShowModal}
         field={field}
         selectedField={selectedField}
         keywords={keywords}
