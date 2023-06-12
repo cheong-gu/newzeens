@@ -13,16 +13,20 @@ export default function Home() {
   const [keywords, setKeywords] = useState<Array<string>>([]);
   const [deliveryPeriod, setDeliveryPeriod] = useState<string>("");
   const [subscriptionFee, setSubscriptionFee] = useState<string>("");
+  const [selectedField, setSelectedField] = useState<Array<string>>([]);
+
 
   return (
     <ContainerStyle>
       <Banners></Banners>
       <Filters
         field={field}
+        selectedField={selectedField}
         keywords={keywords}
         deliveryPeriod={deliveryPeriod}
         subscriptionFee={subscriptionFee}
         setField={setField}
+        setSelectedField={setSelectedField}
         setKeywords={setKeywords}
         setDeliveryPeriod={setDeliveryPeriod}
         setSubscriptionFee={setSubscriptionFee}

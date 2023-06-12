@@ -2,16 +2,21 @@ import { mediaQuery } from "@/app/breakpoints";
 import styled from "@emotion/styled";
 
 export const OutLine = styled.div`
-  margin: 0 10px;
   display: grid;
-  justify-items: center;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  place-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(284px, 284px));
+  grid-template-rows: auto;
 
-  ${mediaQuery.xs} {
-    max-width: fit-content;
-    grid-template-columns: repeat(2, 1fr);
-    /* grid-template-rows: repeat(10, 1fr); */
+  ${mediaQuery.md} {
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, minmax(284px, 284px));
+  }
+
+  ${mediaQuery.sm} {
+    grid-template-columns: repeat(2, minmax(152px, 152px));
   }
 `;
 
@@ -25,7 +30,7 @@ export const TotalDiv = styled.div`
     color: var(--primary);
   }
 
-  ${mediaQuery.xs} {
+  ${mediaQuery.sm} {
     width: max-content;
   }
 `;

@@ -1,8 +1,9 @@
-import styled from "@emotion/styled";
-import { Key, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { NewsLetter } from "./newsLetter";
 import { TotalDiv } from "./styles/NewsLetters.styles";
 import { OutLine } from "./styles/NewsLetters.styles";
+import { Player } from "@lottiefiles/react-lottie-player";
+import loading from "../../public/loading.json";
 
 export interface ListProps {
   newsletterName: string;
@@ -31,38 +32,86 @@ export default function NewsLetters({
   subscriptionFee,
 }: MyComponentProps) {
   const [list, setList] = useState<ListProps[] | null>(null);
+  const [totalLength, setTotalLength] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
+
+  const handleBottomReached = useCallback(() => {
+    setPage((prev) => {
+      if (prev < Math.floor(totalLength / 20) + 1) {
+        return prev + 1;
+      } else {
+        return prev;
+      }
+    });
+  }, [totalLength]);
+
+  const handleScroll = useCallback(() => {
+    const scrollTop = document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const fullHeight = document.documentElement.scrollHeight;
+
+    if (windowHeight + scrollTop >= fullHeight) {
+      handleBottomReached();
+    }
+  }, [handleBottomReached]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      let url = "http://localhost:8080/newsLetter?";
-      const params = [];
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-      if (field != "") params.push(`field=${field}`);
-      if (keywords.length != 0) params.push(`keywords=${keywords.join(",")}`);
-      if (deliveryPeriod != "") params.push(`deliveryPeriod=${deliveryPeriod}`);
-      if (subscriptionFee != "")
-        params.push(`subscriptionFee=${subscriptionFee}`);
-      url += params.join("&");
-
-      console.log(url);
-      const data = await fetch(url).then((res) => res.json());
-      console.log(data);
-      setList(data);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
     };
+  }, [handleScroll, totalLength]);
+
+  const fetchData = useCallback(async () => {
+    let url = "http://localhost:8080/newsLetter?";
+    const params = [];
+
+    if (field != "") params.push(`field=${field}`);
+    if (keywords.length != 0) params.push(`keywords=${keywords.join(",")}`);
+    if (deliveryPeriod != "") params.push(`deliveryPeriod=${deliveryPeriod}`);
+    if (subscriptionFee != "")
+      params.push(`subscriptionFee=${subscriptionFee}`);
+    params.push(`page=${page}`);
+
+    url += params.join("&");
+
+    console.log(url);
+    const data = await fetch(url).then((res) => res.json());
+    console.log(data);
+    const list = data.data;
+    const totalLength = data.totalLength;
+    setTotalLength(totalLength);
+
+    setList((prev) => [...(prev ?? []), ...list]);
+  }, [deliveryPeriod, field, keywords, page, subscriptionFee]);
+
+  useEffect(() => {
     fetchData();
-  }, [field, keywords, deliveryPeriod, subscriptionFee]);
+  }, [field, keywords, deliveryPeriod, subscriptionFee, page, fetchData]);
 
   return (
     <div>
       <TotalDiv>
-        추천 뉴스레터 <span>{list?.length}</span>
+        추천 뉴스레터 <span>{totalLength}</span>
       </TotalDiv>
 
-      <OutLine>
-        {list !== null
-          ? list.map((el, idx) => <NewsLetter key={idx} list={el} />)
-          : undefined}
-      </OutLine>
+      {list !== null ? (
+        <OutLine>
+          {list.map((el, idx) => (
+            <NewsLetter key={idx} list={el} />
+          ))}
+        </OutLine>
+      ) : (
+        <div id="indicator">
+          <Player
+            autoplay
+            loop
+            src={loading}
+            style={{ width: 144, height: 105 }}
+          />
+        </div>
+      )}
     </div>
   );
 }

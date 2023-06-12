@@ -7,8 +7,9 @@ export const breakpoints = {
 /**
  * @description mediaQuery
  * @param lg 1200px
- * @param md 840px
- * @param sm 600px
+ * @param md 992px
+ * @param sm 768px
+ * @param xs 360px
  */
 export const mediaQuery = {
   lg: `@media (max-width: ${breakpoints.lg}px)`,

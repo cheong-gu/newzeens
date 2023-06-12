@@ -11,14 +11,17 @@ import { Container, FilterStyle } from "./styles/Filters.styles";
 import Image from "next/image";
 import Filter from "@/components/filter";
 import { Modal } from "./modal";
+import { ModalContents } from "./modalContents";
 
 export interface MyComponentProps {
   field: string;
   keywords: string[];
+  selectedField: string[];
   deliveryPeriod: string;
   subscriptionFee: string;
   setField: React.Dispatch<React.SetStateAction<string>>;
   setKeywords: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedField: React.Dispatch<React.SetStateAction<string[]>>;
   setDeliveryPeriod: React.Dispatch<React.SetStateAction<string>>;
   setSubscriptionFee: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -31,53 +34,75 @@ export interface FilterProps {
   onClick: React.MouseEventHandler<HTMLLIElement>;
 }
 
+export const arrField: string[] = [
+  "라이프스타일",
+  "IT",
+  "인문/저널리즘",
+  "트렌드",
+  "경제/시사/정치",
+  "마케팅/브랜드",
+  "디자인",
+];
+
+export const arrKeyword: string[] = [
+  "마케터",
+  "개발자",
+  "디자이너",
+  "누구나",
+  "사례 및 업계소식",
+  "투자/상식",
+  "취미/취향",
+  "일상",
+  "믿을 수 있는 글",
+  "발 빠른 정보",
+];
+export const arrPeriod: string[] = [
+  "매일",
+  "주 1회",
+  "주 2회 이상",
+  "월 1회",
+  "월 2회 이상",
+  "무작위",
+];
+export const arrFee: string[] = ["무료", "유료"];
+
 export default function Filters({
   field,
   keywords,
   deliveryPeriod,
   subscriptionFee,
+  selectedField,
   setField,
+  setSelectedField,
   setKeywords,
   setDeliveryPeriod,
   setSubscriptionFee,
 }: MyComponentProps) {
   const listRef = useRef<HTMLLIElement>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [modalContents, setModalContents] = useState<JSX.Element>(<></>);
 
-  const arrField: string[] = [
-    "라이프스타일",
-    "IT",
-    "인문/저널리즘",
-    "트렌드",
-    "경제/시사/정치",
-    "마케팅/브랜드",
-    "디자인",
-  ];
+  useEffect(() => {
+    // 실행할 로직
+    console.log("Selected Field array: ", selectedField);
+  }, [selectedField]);
 
-  const arrKeyword: string[] = [
-    "마케터",
-    "개발자",
-    "디자이너",
-    "누구나",
-    "사례 및 업계소식",
-    "투자/상식",
-    "취미/취향",
-    "일상",
-    "믿을 수 있는 글",
-    "발 빠른 정보",
-  ];
-  const arrPeriod: string[] = [
-    "매일",
-    "주 1회",
-    "주 2회 이상",
-    "월 1회",
-    "월 2회 이상",
-    "무작위",
-  ];
-  const arrFee: string[] = ["무료", "유료"];
+  const onclickAll = (event: MouseEvent<HTMLElement>) => {
+    const text: string = event.currentTarget.innerText;
+    if (arrField.includes(text)) {
+      clickField(event);
+    } else if (arrKeyword.includes(text)) {
+      clickKeywords(event);
+    } else if (arrPeriod.includes(text)) {
+      clickDeliveryPeriod(event);
+    } else if (arrFee.includes(text)) {
+      clickSubscriptionFee(event);
+    }
+  };
 
   const clickField = (event: MouseEvent<HTMLElement>) => {
     const newText: string = event.currentTarget.innerText;
+
     if (newText === "전체") {
       clickReset();
     } else {
@@ -90,6 +115,7 @@ export default function Filters({
 
     const copy = [...keywords];
 
+    console.log(field);
     if (keywords.includes(data)) {
       const result = copy.filter((el) => el !== data);
       setKeywords(result);
@@ -100,13 +126,11 @@ export default function Filters({
 
   const clickDeliveryPeriod = (event: MouseEvent<HTMLElement>) => {
     const data = event.currentTarget.innerText;
-
     setDeliveryPeriod(data == deliveryPeriod ? "" : data);
   };
 
   const clickSubscriptionFee = (event: MouseEvent<HTMLElement>) => {
     const data = event.currentTarget.innerText;
-
     setSubscriptionFee(data == subscriptionFee ? "" : data);
   };
 
@@ -119,6 +143,24 @@ export default function Filters({
 
   const clickModal = useCallback(() => {
     setShowModal(!showModal);
+    setModalContents(
+      <ModalContents
+        field={field}
+        keywords={keywords}
+        deliveryPeriod={deliveryPeriod}
+        subscriptionFee={subscriptionFee}
+        clickField={clickField}
+        clickKeywords={clickKeywords}
+        clickDeliveryPeriod={clickDeliveryPeriod}
+        clickSubscriptionFee={clickSubscriptionFee}
+        clickReset={clickReset}
+        onClick={function (
+          event: MouseEvent<HTMLLIElement, globalThis.MouseEvent>
+        ): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
+    );
   }, [showModal]);
 
   return (
@@ -129,18 +171,85 @@ export default function Filters({
       </div>
       <FilterStyle>
         <div className="rowStyle">
+          <div className="title"></div>
+          <div className="content">
+            <ul id="selectedField">
+              <Filter
+                id="all"
+                el="전체"
+                className={
+                  [
+                    ...arrField.filter((el) => el === field),
+                    ...arrKeyword.filter((el) => keywords.includes(el)),
+                    ...arrPeriod.filter((el) => el === deliveryPeriod),
+                    ...arrFee.filter((el) => el === subscriptionFee),
+                  ].length === 0
+                    ? "filter_active"
+                    : "filter"
+                }
+                ref={listRef}
+                onClick={clickField}
+              ></Filter>
+              {[
+                ...arrField.filter((el) => el === field),
+                ...arrKeyword.filter((el) => keywords.includes(el)),
+                ...arrPeriod.filter((el) => el === deliveryPeriod),
+                ...arrFee.filter((el) => el === subscriptionFee),
+              ].length === 0 ? (
+                <div className="rowStyle">
+                  <div className="title">
+                    <p>분야</p>
+                  </div>
+                  <div className="content">
+                    <ul id="mobileField">
+                      {arrField.map((el: string, idx: number) => (
+                        <Filter
+                          id={el}
+                          el={el}
+                          key={idx}
+                          className={field === el ? "filter_active" : "filter"}
+                          ref={listRef}
+                          onClick={clickField}
+                        ></Filter>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ) : (
+                [
+                  ...arrField.filter((el) => el === field),
+                  ...arrKeyword.filter((el) => keywords.includes(el)),
+                  ...arrPeriod.filter((el) => el === deliveryPeriod),
+                  ...arrFee.filter((el) => el === subscriptionFee),
+                ].map((el: string, idx: number) => (
+                  <Filter
+                    id={el}
+                    el={el}
+                    key={idx}
+                    className={"filter_active"}
+                    ref={listRef}
+                    onClick={onclickAll}
+                  ></Filter>
+                ))
+              )}
+
+              <Image
+                className="modalBtn"
+                src="./modal.svg"
+                alt="modal"
+                width={36}
+                height={36}
+                onClick={clickModal}
+              />
+            </ul>
+          </div>
+        </div>
+        <div className="rowStyle">
           <div className="title">
             <p>분야</p>
           </div>
           <div className="content">
             <ul id="field">
-              <Filter
-                id="all"
-                el="전체"
-                className={field ? "filter" : "filter_active"}
-                ref={listRef}
-                onClick={clickField}
-              ></Filter>
               {arrField.map((el: string, idx: number) => (
                 <Filter
                   id={el}
@@ -227,7 +336,7 @@ export default function Filters({
           </div>
         </div>
       </FilterStyle>
-      {showModal && <Modal clickModal={clickModal}>안녕하세요</Modal>}
+      {showModal && <Modal clickModal={clickModal}>{modalContents}</Modal>}
     </Container>
   );
 }

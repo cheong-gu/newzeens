@@ -19,6 +19,9 @@ export const FilterLi = styled.li`
     }
     a {
       font-size: 15px;
+      ${mediaQuery.sm} {
+        font-size: 14px;
+      }
     }
   }
   &.filter_active {
@@ -31,6 +34,9 @@ export const FilterLi = styled.li`
 
     a {
       font-size: 15px;
+      ${mediaQuery.sm} {
+        font-size: 14px;
+      }
     }
     &:hover {
       border: 1px solid var(--primary);
@@ -39,7 +45,7 @@ export const FilterLi = styled.li`
     }
   }
 
-  ${mediaQuery.xs} {
+  ${mediaQuery.sm} {
     width: max-content;
     height: 33px !important;
     display: flex;

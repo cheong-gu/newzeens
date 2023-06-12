@@ -5,7 +5,7 @@ export const BannerContainer = styled.div`
   .swiper-pagination {
     display: none;
   }
-  ${mediaQuery.xs} {
+  ${mediaQuery.sm} {
     .swiper-pagination {
       display: inherit;
     }
@@ -24,6 +24,7 @@ export const BannerStyle = styled.div`
   min-height: 200px !important;
   & img {
     object-fit: cover;
+    filter: brightness(70%);
   }
 `;
 
@@ -37,7 +38,7 @@ export const Writter = styled.div`
   p {
     font-size: 24px;
 
-    ${mediaQuery.xs} {
+    ${mediaQuery.sm} {
       font-size: 18px;
     }
   }
@@ -45,8 +46,13 @@ export const Writter = styled.div`
     font-size: 16px;
     color: var(--text_gray40);
 
-    ${mediaQuery.xs} {
+    ${mediaQuery.sm} {
       font-size: 14px;
     }
+  }
+
+  :hover {
+    transform: scale(1.2);
+    transition: 0.5s;
   }
 `;
