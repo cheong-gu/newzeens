@@ -19,12 +19,11 @@ const Suggestion = ({ tag, list }: SuggestionProps) => {
         {list.map((item, index) => {
           const { _id, newsletterName, mainImage, publisher, introduction } =
             item;
-          const encodedURI = encodeURIComponent(JSON.stringify(item));
           return (
             <Link
               key={`${newsletterName}_${index}`}
               className={styles["suggestion-card"]}
-              href={`detail/${_id}/${encodedURI}`}
+              href={`detail/${_id}`}
             >
               <Image
                 className={styles["card-image"]}
