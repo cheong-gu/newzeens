@@ -76,6 +76,7 @@ export default function Filters({
   setSubscriptionFee,
 }: MyComponentProps) {
   const listRef = useRef<HTMLLIElement>(null);
+  const [page, setPage] = useState<number>(1);
   const [totalLength, setTotalLength] = useState<number>(0);
 
   useEffect(() => {
@@ -151,12 +152,20 @@ export default function Filters({
 
   const fetchData = useCallback(async () => {
     let url = "http://localhost:8080/newsLetter?";
+    const params = [];
 
+    if (field != "") params.push(`field=${field}`);
+    if (keywords.length != 0) params.push(`keywords=${keywords.join(",")}`);
+    if (deliveryPeriod != "") params.push(`deliveryPeriod=${deliveryPeriod}`);
+    if (subscriptionFee != "")
+      params.push(`subscriptionFee=${subscriptionFee}`);
+    params.push(`page=${page}`);
+
+    url += params.join("&");
     const data = await fetch(url).then((res) => res.json());
-
     const totalLength = data.totalLength;
     setTotalLength(totalLength);
-  }, []);
+  }, [deliveryPeriod, field, keywords, page, subscriptionFee]);
 
   useEffect(() => {
     fetchData();
