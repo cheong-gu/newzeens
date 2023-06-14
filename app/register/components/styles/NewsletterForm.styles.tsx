@@ -25,6 +25,10 @@ export const StyledButton = styled.button`
   color: #ffffff;
 
   cursor: pointer;
+
+  :hover {
+    background-color: #2141e5;
+  }
 `;
 
 export const Divider = styled.div`
