@@ -23,14 +23,24 @@ export const OutLine = styled.div`
 export const TotalDiv = styled.div`
   font-size: 1.5rem;
   font-weight: 500;
-  margin: 1.875rem auto;
   text-align: center;
 
   span {
     color: var(--primary);
   }
 
-  ${mediaQuery.sm} {
-    width: max-content;
+  .filterTotal {
+    display: none;
+    ${mediaQuery.sm} {
+      margin: 0 auto;
+      margin-top: 20px;
+      display: inherit;
+    }
+  }
+  .newsTotal {
+    margin: 1.875rem auto;
+    ${mediaQuery.sm} {
+      display: none;
+    }
   }
 `;

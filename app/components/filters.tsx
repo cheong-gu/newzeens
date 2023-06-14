@@ -1,17 +1,10 @@
-import styled from "@emotion/styled";
-import {
-  ChangeEvent,
-  MouseEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 import { Container, FilterStyle } from "./styles/Filters.styles";
 import Image from "next/image";
 import Filter from "@/components/filter";
 import { Modal } from "./modal";
 import { ModalContents } from "./modalContents";
+import { TotalDiv } from "./styles/NewsLetters.styles";
 
 export interface MyComponentProps {
   field: string;
@@ -83,7 +76,7 @@ export default function Filters({
   setSubscriptionFee,
 }: MyComponentProps) {
   const listRef = useRef<HTMLLIElement>(null);
-  const [modalContents, setModalContents] = useState<JSX.Element>(<></>);
+  const [totalLength, setTotalLength] = useState<number>(0);
 
   useEffect(() => {
     // 실행할 로직
@@ -146,18 +139,35 @@ export default function Filters({
 
   const openModal = useCallback(() => {
     setShowModal(true);
-  }, [showModal])
+  }, [setShowModal]);
 
   const closeModal = useCallback(() => {
     setShowModal(false);
-  }, [showModal])
+  }, [setShowModal]);
 
   const clickModalBtn = () => {
     openModal();
-  }
+  };
 
+  const fetchData = useCallback(async () => {
+    let url = "http://localhost:8080/newsLetter?";
+
+    const data = await fetch(url).then((res) => res.json());
+
+    const totalLength = data.totalLength;
+    setTotalLength(totalLength);
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData, totalLength]);
   return (
     <Container>
+      <TotalDiv>
+        <div className="filterTotal">
+          추천 뉴스레터 <span>{totalLength}</span>
+        </div>
+      </TotalDiv>
       <div className="reset" onClick={clickReset}>
         <p>필터 초기화</p>
         <Image src="/reset.svg" alt="reset" width={14} height={14}></Image>
@@ -319,22 +329,28 @@ export default function Filters({
           </div>
         </div>
       </FilterStyle>
-      {showModal && <Modal backDrop={closeModal}> <ModalContents
-        field={field}
-        keywords={keywords}
-        deliveryPeriod={deliveryPeriod}
-        subscriptionFee={subscriptionFee}
-        clickField={clickField}
-        clickKeywords={clickKeywords}
-        clickDeliveryPeriod={clickDeliveryPeriod}
-        clickSubscriptionFee={clickSubscriptionFee}
-        clickReset={clickReset}
-        onClick={function (
-          event: MouseEvent<HTMLLIElement, globalThis.MouseEvent>
-        ): void {
-          throw new Error("Function not implemented.");
-        }}
-      /></Modal>}
+      {showModal && (
+        <Modal backDrop={closeModal}>
+          {" "}
+          <ModalContents
+            field={field}
+            keywords={keywords}
+            deliveryPeriod={deliveryPeriod}
+            subscriptionFee={subscriptionFee}
+            clickField={clickField}
+            clickKeywords={clickKeywords}
+            clickDeliveryPeriod={clickDeliveryPeriod}
+            clickSubscriptionFee={clickSubscriptionFee}
+            clickReset={clickReset}
+            closeModal={closeModal}
+            onClick={function (
+              event: MouseEvent<HTMLLIElement, globalThis.MouseEvent>
+            ): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
+        </Modal>
+      )}
     </Container>
   );
 }
