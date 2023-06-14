@@ -61,10 +61,10 @@ const {
 } = INPUT_DATA;
 
 interface NewsletterFormProps {
-  updateList: () => Promise<void>;
+  resetList: () => void;
 }
 
-const NewsletterForm = ({ updateList }: NewsletterFormProps) => {
+const NewsletterForm = ({ resetList }: NewsletterFormProps) => {
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const [keywordFormData, setKeywordFormData] = useState(INITIAL_KEYWORD_DATA);
   const [imageFile, setImageFile] = useState<File>();
@@ -199,7 +199,7 @@ const NewsletterForm = ({ updateList }: NewsletterFormProps) => {
 
       if (imagePath !== null) {
         await handleFormUpload(body);
-        await updateList();
+        resetList();
         resetData();
       } else {
         alert("이미지 파일이 유효한지 확인해주세요.");
@@ -212,7 +212,7 @@ const NewsletterForm = ({ updateList }: NewsletterFormProps) => {
       formData,
       handleImageUpload,
       handleFormUpload,
-      updateList,
+      resetList,
       resetData,
     ]
   );
