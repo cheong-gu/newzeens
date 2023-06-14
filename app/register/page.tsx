@@ -5,13 +5,17 @@ import styles from "./styles.module.css";
 import NewsletterForm from "./components/NewsletterForm";
 import { NewsletterResponseType } from "./newsletter.type";
 import ListCard from "./components/ListCard";
+import { Player } from "@lottiefiles/react-lottie-player";
+import loading from "../../public/loading.json";
 
 const RegisterPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [totalLength, setTotalLength] = useState(0);
   const [list, setList] = useState<NewsletterResponseType[]>([]);
   const [page, setPage] = useState<number>(1);
 
   const getNewsletterList = useCallback(async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(
         `http://localhost:8080/newsLetter?page=${page}`
@@ -26,9 +30,11 @@ const RegisterPage = () => {
     } catch (error) {
       console.error(error);
     }
+    setIsLoading(false);
   }, [page]);
 
   const resetList = useCallback(() => {
+    setIsLoading(true);
     setTotalLength(0);
     setList([]);
     if (page === 1) {
@@ -64,7 +70,7 @@ const RegisterPage = () => {
     const scrollTop = document.documentElement.scrollTop;
     const fullHeight = document.documentElement.scrollHeight;
 
-    if (windowHeight + scrollTop >= fullHeight) {
+    if (windowHeight + scrollTop >= fullHeight && !isLoading) {
       setPage((prev) => {
         if (prev < Math.floor(totalLength / 20) + 1) {
           return prev + 1;
@@ -73,7 +79,7 @@ const RegisterPage = () => {
         }
       });
     }
-  }, [totalLength]);
+  }, [isLoading, totalLength]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -98,17 +104,25 @@ const RegisterPage = () => {
           리스트 관리{" "}
           <span className={styles["title-index"]}>{totalLength}</span>
         </h1>
-        {list && list.length > 0 ? (
-          list.map((data, index) => (
-            <ListCard
-              key={`${data.newsletterName}_${index}`}
-              index={totalLength - index}
-              list={data}
-              onDelete={handleDelete}
+        {list.length > 0
+          ? list.map((data, index) => (
+              <ListCard
+                key={`${data.newsletterName}_${index}`}
+                index={totalLength - index}
+                list={data}
+                onDelete={handleDelete}
+              />
+            ))
+          : !isLoading && <div>데이터를 찾을 수 없습니다.</div>}
+        {isLoading && (
+          <div id="indicator">
+            <Player
+              autoplay
+              loop
+              src={loading}
+              style={{ width: 144, height: 105 }}
             />
-          ))
-        ) : (
-          <div>데이터를 찾을 수 없습니다.</div>
+          </div>
         )}
       </div>
     </main>
