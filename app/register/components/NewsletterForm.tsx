@@ -12,7 +12,6 @@ import TextInput from "./Form/TextInput";
 import TextArea from "./Form/TextArea";
 import ImageUploader from "./Form/ImageUploader";
 import { NewsletterFormType } from "../newsletter.type";
-import { useRouter } from "next/navigation";
 
 const INITIAL_FORM_DATA = {
   newsletterName: "",
@@ -61,9 +60,11 @@ const {
   subscribeLink,
 } = INPUT_DATA;
 
-const NewsletterForm = () => {
-  const router = useRouter();
+interface NewsletterFormProps {
+  updateList: () => Promise<void>;
+}
 
+const NewsletterForm = ({ updateList }: NewsletterFormProps) => {
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const [keywordFormData, setKeywordFormData] = useState(INITIAL_KEYWORD_DATA);
   const [imageFile, setImageFile] = useState<File>();
@@ -140,6 +141,28 @@ const NewsletterForm = () => {
     }
   }, [imageFile]);
 
+  const handleFormUpload = useCallback(async (body: NewsletterFormType) => {
+    try {
+      const response = await fetch("http://localhost:8080/newsLetter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        alert("입력값이 유효한지 확인해주세요.");
+        return;
+      }
+
+      const result = await response.json();
+      console.log("[NewsletterContaint/postNewsletter]", { result });
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   const handleSubmit = useCallback(
     async (event: React.FormEvent) => {
       event.preventDefault();
@@ -175,40 +198,22 @@ const NewsletterForm = () => {
       const imagePath = await handleImageUpload();
 
       if (imagePath !== null) {
-        try {
-          const response = await fetch("http://localhost:8080/newsLetter", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-          });
-
-          if (!response.ok) {
-            alert("입력값이 유효한지 확인해주세요.");
-            return;
-          }
-
-          const result = await response.json();
-          console.log("[NewsletterContaint/postNewsletter]", { result });
-
-          resetData();
-          router.push("/register");
-        } catch (error) {
-          console.error(error);
-        }
+        await handleFormUpload(body);
+        await updateList();
+        resetData();
       } else {
         alert("이미지 파일이 유효한지 확인해주세요.");
       }
     },
     [
-      formData,
-      handleImageUpload,
-      resetData,
-      router,
       keywordFormData.keyword2,
       keywordFormData.keyword3,
       keywordFormData.keyword4,
+      formData,
+      handleImageUpload,
+      handleFormUpload,
+      updateList,
+      resetData,
     ]
   );
 
