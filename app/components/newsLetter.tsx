@@ -5,31 +5,25 @@ import { ImageStyle, OutLine } from "./styles/NewsLetter.styles";
 import Link from "next/link";
 import { NewsletterResponseType } from "../register/newsletter.type";
 
-export const NewsLetter = ({
-  list,
-}: {
-  list: NewsletterResponseType | null;
-}) => {
+export const NewsLetter = ({ list }: { list: ListProps }) => {
+  const { newsletterName, mainImage, publisher, introduction } = list;
   return (
     <OutLine>
       <Link href={`detail/${list?._id}`}>
         <div className="grid">
           <ImageStyle>
-            <Image className="image" src="/body.png" alt="image" fill />
+            <Image className="image" src={mainImage} alt="image" fill />
           </ImageStyle>
           <ul>
             <li>{list?.field}</li>
-            {/* {list?.keywords.map((el, idx) => (
-            <li key={idx}>{el}</li>
-          ))} */}
           </ul>
 
           <div className="titleDiv">
-            <span className="title">{list?.newsletterName}</span>
-            <span className="publisher">{list?.publisher}</span>
+            <span className="title">{newsletterName}</span>
+            <span className="publisher">{publisher}</span>
           </div>
 
-          <div className="introduction">{list?.introduction}</div>
+          <div className="introduction">{introduction}</div>
         </div>
       </Link>
     </OutLine>

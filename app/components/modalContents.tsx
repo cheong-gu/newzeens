@@ -2,6 +2,7 @@ import Filter from "@/components/filter";
 import { arrFee, arrField, arrKeyword, arrPeriod } from "./filters";
 import { MouseEvent, useRef } from "react";
 import { Container, FilterStyle, Topline } from "./styles/ModalContents.styles";
+import Image from "next/image";
 
 export interface ModalProps {
   field: string;
@@ -12,6 +13,7 @@ export interface ModalProps {
   clickKeywords: (event: MouseEvent<HTMLElement>) => void;
   clickDeliveryPeriod: (event: MouseEvent<HTMLElement>) => void;
   clickSubscriptionFee: (event: MouseEvent<HTMLElement>) => void;
+  closeModal: () => void;
   clickReset: () => void;
   onClick: React.MouseEventHandler<HTMLLIElement>;
 }
@@ -25,6 +27,7 @@ export const ModalContents = ({
   clickKeywords,
   clickDeliveryPeriod,
   clickSubscriptionFee,
+  closeModal,
   clickReset,
 }: ModalProps) => {
   const listRef = useRef<HTMLLIElement>(null);
@@ -32,6 +35,14 @@ export const ModalContents = ({
     <Container>
       <Topline>
         <p>전체 필터</p>
+        <Image
+          className="close"
+          src="/close.svg"
+          alt="close"
+          width={24}
+          height={24}
+          onClick={closeModal}
+        />
       </Topline>
       <FilterStyle>
         <div className="rowStyle">
@@ -117,6 +128,12 @@ export const ModalContents = ({
           </div>
         </div>
       </FilterStyle>
+      <div id="reset" onClick={clickReset}>
+        <div>
+          <span>필터 초기화</span>
+          <Image src="/reset.svg" alt="reset" width={14} height={14}></Image>
+        </div>
+      </div>
     </Container>
   );
 };

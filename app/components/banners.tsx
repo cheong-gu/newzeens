@@ -22,21 +22,6 @@ const Banners = () => {
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         scrollbar={{ draggable: true }}
         onSwiper={(swiper) => console.log(swiper)}
-        breakpoints={
-          {
-            // when window width is >= 640px
-            // 360: {
-            //   width: 360,
-            //   slidesPerView: 1,
-            //   pagination: { clickable: true },
-            // },
-            // when window width is >= 768px
-            // 768: {
-            //   width: 768,
-            //   slidesPerView: 2,
-            // },
-          }
-        }
       >
         <SwiperSlide>
           <BannerStyle>

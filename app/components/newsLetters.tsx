@@ -93,7 +93,9 @@ export default function NewsLetters({
   return (
     <div>
       <TotalDiv>
-        추천 뉴스레터 <span>{totalLength}</span>
+        <div className="newsTotal">
+          추천 뉴스레터 <span>{totalLength}</span>
+        </div>
       </TotalDiv>
 
       {list !== null ? (
