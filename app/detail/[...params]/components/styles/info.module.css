@@ -29,11 +29,13 @@
     height: 387px;
     border-radius: 10px;
     object-fit: contain;
-
+    border: 0.6px solid #DFE4F5;
 
     @media (max-width: 840px) {
         width: 176px;
         height: 176px;
+        border: 0px;
+        border-bottom: 0.6px solid #C7CEE3;
     }
 
     @media (max-width: 600px) {

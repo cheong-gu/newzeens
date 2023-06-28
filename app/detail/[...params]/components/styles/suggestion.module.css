@@ -116,6 +116,7 @@
     height: 182px;
     object-fit: contain;
     border-radius: 10px;
+    border: 0.6px solid #C7CEE3;
     @media (max-width: 600px) {
         width: 152px;
         height: 152px;
