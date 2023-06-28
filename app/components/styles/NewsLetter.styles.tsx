@@ -91,6 +91,7 @@ export const ImageStyle = styled.div`
 
   .image {
     position: relative;
+    border: 1px solid var(--text_gray40);
     border-radius: 10px;
 
     :hover {
