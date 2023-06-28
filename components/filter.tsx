@@ -1,5 +1,5 @@
 import { FilterProps } from "@/app/components/filters";
-import { FilterLi } from "./styles/Filter.styles";
+import { FilterLi } from "./styles/filter.styles";
 import { forwardRef } from "react";
 
 const Filter = forwardRef(

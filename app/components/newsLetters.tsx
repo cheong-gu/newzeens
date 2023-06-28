@@ -6,6 +6,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import loading from "../../public/loading.json";
 
 export interface ListProps {
+  _id: string;
   newsletterName: string;
   publisher: string;
   introduction: string;
