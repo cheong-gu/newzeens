@@ -151,7 +151,8 @@ export default function Filters({
   };
 
   const fetchData = useCallback(async () => {
-    let url = "http://localhost:8080/newsLetter?";
+    let url =
+      "http://ec2-52-78-212-222.ap-northeast-2.compute.amazonaws.com:8080/newsLetter?";
     const params = [];
 
     if (field != "") params.push(`field=${field}`);

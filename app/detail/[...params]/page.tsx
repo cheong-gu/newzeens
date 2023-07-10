@@ -5,9 +5,12 @@ import NewsLetterInfo from "./components/NewsLetterInfo";
 import { NewsletterResponseType } from "../../register/newsletter.type";
 
 const getCurrentNewsletter = async (id: string) => {
-  const res = await fetch(`http://localhost:8080/newsLetter/${id}`, {
-    next: { revalidate: 0 },
-  });
+  const res = await fetch(
+    `http://ec2-52-78-212-222.ap-northeast-2.compute.amazonaws.com:8080/newsLetter/${id}`,
+    {
+      next: { revalidate: 0 },
+    }
+  );
   if (!res) {
     throw new Error("[DetailPage/getCurrentNewsletter] Something Wrong...");
   }

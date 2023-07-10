@@ -16,9 +16,10 @@ const RegisterPage = () => {
 
   const getNewsletterList = useCallback(async () => {
     setIsLoading(true);
+
     try {
       const response = await fetch(
-        `http://localhost:8080/newsLetter?page=${page}`
+        `http://ec2-52-78-212-222.ap-northeast-2.compute.amazonaws.com:8080/newsLetter?page=${page}`
       );
       if (!response.ok) {
         alert("리스트를 불러올 수 없습니다. 다시 시도해주세요.");
