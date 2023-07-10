@@ -5,12 +5,9 @@ import NewsLetterInfo from "./components/NewsLetterInfo";
 import { NewsletterResponseType } from "../../register/newsletter.type";
 
 const getCurrentNewsletter = async (id: string) => {
-  const res = await fetch(
-    `http://ec2-52-78-212-222.ap-northeast-2.compute.amazonaws.com:8080/newsLetter/${id}`,
-    {
-      next: { revalidate: 0 },
-    }
-  );
+  const res = await fetch(`https://newzeens.newzeens.store/newsLetter/${id}`, {
+    next: { revalidate: 0 },
+  });
   if (!res) {
     throw new Error("[DetailPage/getCurrentNewsletter] Something Wrong...");
   }
@@ -23,7 +20,7 @@ const getFeaturedNewsletter = async (
 ): Promise<NewsletterResponseType[]> => {
   try {
     const response = await fetch(
-      `http://ec2-52-78-212-222.ap-northeast-2.compute.amazonaws.com:8080/newsLetter?field=${tag}`,
+      `https://newzeens.newzeens.store/newsLetter?field=${tag}`,
       {
         next: { revalidate: 0 },
       }

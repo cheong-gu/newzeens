@@ -65,8 +65,7 @@ export default function NewsLetters({
   }, [handleScroll, totalLength]);
 
   const fetchData = useCallback(async () => {
-    let url =
-      "http://ec2-52-78-212-222.ap-northeast-2.compute.amazonaws.com:8080/newsLetter?";
+    let url = "https://newzeens.newzeens.store/newsLetter?";
     const params = [];
 
     if (field != "") params.push(`field=${field}`);
