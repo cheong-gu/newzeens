@@ -23,7 +23,7 @@ const getFeaturedNewsletter = async (
 ): Promise<NewsletterResponseType[]> => {
   try {
     const response = await fetch(
-      `http://localhost:8080/newsLetter?field=${tag}`,
+      `http://ec2-52-78-212-222.ap-northeast-2.compute.amazonaws.com:8080/newsLetter?field=${tag}`,
       {
         next: { revalidate: 0 },
       }

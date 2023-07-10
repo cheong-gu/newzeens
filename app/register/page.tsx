@@ -48,9 +48,12 @@ const RegisterPage = () => {
   const handleDelete = useCallback(
     async (id: string) => {
       try {
-        const response = await fetch(`http://localhost:8080/newsLetter/${id}`, {
-          method: "DELETE",
-        });
+        const response = await fetch(
+          `http://ec2-52-78-212-222.ap-northeast-2.compute.amazonaws.com:8080/newsLetter/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
         console.log("[NewsletterContaint/postNewsletter]", { response });
 
         if (!response.ok) {
