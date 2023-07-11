@@ -23,7 +23,7 @@ const Suggestion = ({ tag, list }: SuggestionProps) => {
             <Link
               key={`${newsletterName}_${index}`}
               className={styles["suggestion-card"]}
-              href={`detail/${_id}`}
+              href={`/detail/${_id}`}
             >
               <Image
                 className={styles["card-image"]}

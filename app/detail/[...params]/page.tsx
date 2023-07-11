@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import styles from "./styles.module.css";
 import Suggestion from "./components/Suggestion";
@@ -7,7 +5,7 @@ import NewsLetterInfo from "./components/NewsLetterInfo";
 import { NewsletterResponseType } from "../../register/newsletter.type";
 
 const getCurrentNewsletter = async (id: string) => {
-  const res = await fetch(`https://newzeens.newzeens.store/newsLetter/${id}`, {
+  const res = await fetch(`https://newzeens.store/newsLetter/${id}`, {
     next: { revalidate: 0 },
   });
   if (!res) {
@@ -22,7 +20,7 @@ const getFeaturedNewsletter = async (
 ): Promise<NewsletterResponseType[]> => {
   try {
     const response = await fetch(
-      `https://newzeens.newzeens.store/newsLetter?field=${tag}`,
+      `https://newzeens.store/newsLetter?field=${tag}`,
       {
         next: { revalidate: 0 },
       }

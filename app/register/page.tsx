@@ -19,7 +19,7 @@ const RegisterPage = () => {
 
     try {
       const response = await fetch(
-        `https://newzeens.newzeens.store/newsLetter?page=${page}`
+        `https://newzeens.store/newsLetter?page=${page}`
       );
       if (!response.ok) {
         alert("리스트를 불러올 수 없습니다. 다시 시도해주세요.");
@@ -49,7 +49,7 @@ const RegisterPage = () => {
     async (id: string) => {
       try {
         const response = await fetch(
-          `https://newzeens.newzeens.store/newsLetter/${id}`,
+          `https://newzeens.store/newsLetter/${id}`,
           {
             method: "DELETE",
           }

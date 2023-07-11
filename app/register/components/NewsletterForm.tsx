@@ -123,7 +123,7 @@ const NewsletterForm = ({ resetList }: NewsletterFormProps) => {
       const formData = new FormData();
       formData.append("file", imageFile);
 
-      const response = await fetch("http://localhost:8080/upload", {
+      const response = await fetch("https://newzeens.store/upload", {
         method: "POST",
         body: formData,
       });
@@ -143,7 +143,7 @@ const NewsletterForm = ({ resetList }: NewsletterFormProps) => {
 
   const handleFormUpload = useCallback(async (body: NewsletterFormType) => {
     try {
-      const response = await fetch("http://localhost:8080/newsLetter", {
+      const response = await fetch("https://newzeens.store/newsLetter", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

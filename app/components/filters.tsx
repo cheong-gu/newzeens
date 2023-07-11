@@ -151,7 +151,7 @@ export default function Filters({
   };
 
   const fetchData = useCallback(async () => {
-    let url = "https://newzeens.newzeens.store/newsLetter?";
+    let url = "https://newzeens.store/newsLetter?";
     const params = [];
 
     if (field != "") params.push(`field=${field}`);
