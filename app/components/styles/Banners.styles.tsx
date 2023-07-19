@@ -37,13 +37,17 @@ export const Writter = styled.div`
   text-align: center;
   p {
     font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 12px;
 
     ${mediaQuery.sm} {
       font-size: 18px;
+      margin-bottom: 8px;
     }
   }
   span {
     font-size: 16px;
+    font-weight: 500;
     color: var(--text_gray40);
 
     ${mediaQuery.sm} {

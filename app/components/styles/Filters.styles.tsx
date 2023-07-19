@@ -8,6 +8,8 @@ export const Container = styled.div`
   margin: 40px;
 
   .reset {
+    margin-left: 10px;
+    padding-bottom: 4px;
     color: var(--text_black);
     display: flex;
     cursor: pointer;
@@ -50,19 +52,19 @@ export const Container = styled.div`
 
   ${mediaQuery.sm} {
     border-bottom: 0;
-    overflow: auto;
     margin: auto;
     .reset {
       display: none;
-    }
-    ::-webkit-scrollbar {
-      display: none !important;
     }
   }
 `;
 
 export const FilterStyle = styled.div`
   margin: 20px 10px;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
 
   .rowStyle {
     color: var(--text_black);
@@ -72,7 +74,7 @@ export const FilterStyle = styled.div`
 
     .title {
       min-width: 80px;
-      font-weight: 650;
+      font-weight: 600;
     }
 
     .content {

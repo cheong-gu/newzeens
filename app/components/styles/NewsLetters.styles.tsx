@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 
 export const OutLine = styled.div`
   display: grid;
-  place-items: center;
   justify-content: center;
   align-content: center;
   gap: 20px;
@@ -22,7 +21,7 @@ export const OutLine = styled.div`
 
 export const TotalDiv = styled.div`
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
 
   span {

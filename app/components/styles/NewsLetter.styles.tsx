@@ -6,7 +6,14 @@ export const OutLine = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
+    margin-bottom: 52px;
+
+    ${mediaQuery.sm} {
+      margin-bottom: 32px;
+    }
     ul {
+      margin-top: 24px;
+      margin-bottom: 16px;
       li {
         width: max-content;
         font-size: 12px;
@@ -15,7 +22,7 @@ export const OutLine = styled.div`
         border-radius: 4px;
         background-color: var(--text_gray20);
         padding: 8px;
-        margin: 10px 0;
+
         /* margin-right: 4px; */
         cursor: pointer;
 
@@ -38,8 +45,11 @@ export const OutLine = styled.div`
 
       .title {
         line-height: 1;
+        font-weight: 600;
         font-size: 18px;
         margin-right: 4px;
+        /* margin-bottom: 16px; */
+        color: var(--text_gray90);
       }
 
       .publisher {
@@ -57,19 +67,27 @@ export const OutLine = styled.div`
     .introduction {
       position: relative;
       max-width: 284px;
+      max-height: 70px;
       overflow: hidden;
       text-overflow: ellipsis;
       word-break: break-all;
       margin: 8px 0;
       font-size: 16px;
+      font-weight: 400;
+      line-height: 150%;
       color: var(--text_gray80);
 
-      ${mediaQuery.sm} {
-        max-width: 152px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        word-break: break-all;
-      }
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    ${mediaQuery.sm} {
+      max-width: 152px;
+      line-height: 140%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-all;
     }
   }
 `;
@@ -91,12 +109,15 @@ export const ImageStyle = styled.div`
 
   .image {
     position: relative;
-    border: 1px solid var(--text_gray40);
     border-radius: 10px;
 
     :hover {
       animation: loop 0.5s forwards;
       /* transform */
+    }
+
+    ${mediaQuery.sm} {
+      border: 0.6px solid var(--text_gray40);
     }
   }
   & img {
