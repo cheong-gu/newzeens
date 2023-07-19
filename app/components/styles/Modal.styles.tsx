@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 export const ModalContainer = styled.div`
   margin: 0 auto;
-  z-index: 10000;
+  z-index: 10001;
 `;
 
 export const DialogBox = styled.dialog`
