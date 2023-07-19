@@ -8,7 +8,7 @@ export const ModalContainer = styled.div`
 
 export const DialogBox = styled.dialog`
   ${mediaQuery.sm} {
-    position: absolute;
+    position: fixed;
     top: 0;
     display: flex;
 
