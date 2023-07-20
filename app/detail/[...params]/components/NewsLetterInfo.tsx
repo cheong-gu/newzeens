@@ -51,6 +51,9 @@ const NewsLetterInfo = ({ info }: NewsLetterInfoProps) => {
           <Link
             className={styles["link-outlined"]}
             href={info.previousIssueLink ?? "/"}
+            style={{
+              pointerEvents: info.previousIssueLink === "" ? "none" : "auto",
+            }}
           >
             <Button styleType="outlined" label="지난 호 보기" />
           </Link>

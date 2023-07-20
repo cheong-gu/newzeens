@@ -54,6 +54,7 @@
 }
 
 .info-box {
+    width: 100%;
     margin-top: 32px;
     margin-bottom: 38px;
     padding: 0px 20px;
