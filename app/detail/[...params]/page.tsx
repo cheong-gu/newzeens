@@ -16,6 +16,7 @@ const getCurrentNewsletter = async (id: string) => {
 };
 
 const getFeaturedNewsletter = async (
+  id: string,
   tag: string
 ): Promise<NewsletterResponseType[]> => {
   try {
@@ -31,7 +32,9 @@ const getFeaturedNewsletter = async (
     }
 
     const { data }: { data: NewsletterResponseType[] } = await response.json();
-    const shuffledArray = shuffleArray(data);
+    const filteredData = data.filter((newsletter) => newsletter._id !== id);
+
+    const shuffledArray = shuffleArray(filteredData);
     const selectedData = shuffledArray.slice(0, 6);
 
     return selectedData;
@@ -62,12 +65,15 @@ const shuffleArray = (
 };
 
 interface DetailPageProps {
-  params: { params: string };
+  params: { params: string[] };
 }
 
 export default async function Page({ params: { params } }: DetailPageProps) {
-  const newsletterInfo = await getCurrentNewsletter(params);
-  const featuredList = await getFeaturedNewsletter(newsletterInfo.field);
+  const newsletterInfo = await getCurrentNewsletter(params[0]);
+  const featuredList = await getFeaturedNewsletter(
+    params[0],
+    newsletterInfo.field
+  );
 
   return (
     <div className={styles.wrapper}>
