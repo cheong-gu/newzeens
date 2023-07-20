@@ -13,31 +13,31 @@ interface NewsLetterInfoProps {
 const NewsLetterInfo = ({ info }: NewsLetterInfoProps) => {
   return (
     <div className={styles["info-container"]}>
-      <Image
-        className={styles["main-image"]}
-        src={info.mainImage}
-        alt="main"
-        width={387}
-        height={387}
-      />
-      <div className={styles["info-button-box"]}>
-        <div className={styles["info-box"]}>
-          <div>
-            <h1 className={styles["newsletter-name"]}>{info.newsletterName}</h1>
-            <h3 className={styles["publisher"]}>{info.publisher}</h3>
-            <div className={styles["keyword-box"]}>
-              <div className={styles["keyword-row"]}>
-                <p className={styles["category"]}>소개</p>
-                <p className={styles["explanation"]}>{info.introduction}</p>
-              </div>
-              <div className={styles["keyword-row"]}>
-                <p className={styles["category"]}>발송 주기</p>
-                <p className={styles["explanation"]}>{info.deliveryPeriod}</p>
-              </div>
-              <div className={styles["keyword-row"]}>
-                <p className={styles["category"]}>구독비</p>
-                <p className={styles["explanation"]}>{info.subscriptionFee}</p>
-              </div>
+      <div className={styles["image-box"]}>
+        <Image
+          className={styles["main-image"]}
+          src={info.mainImage}
+          alt="main"
+          width={388}
+          height={388}
+        />
+      </div>
+      <div className={styles["info-box"]}>
+        <div className={styles["info-text-box"]}>
+          <h1 className={styles["newsletter-name"]}>{info.newsletterName}</h1>
+          <h3 className={styles["publisher"]}>{info.publisher}</h3>
+          <div className={styles["keyword-box"]}>
+            <div className={styles["keyword-row"]}>
+              <p className={styles["category"]}>소개</p>
+              <p className={styles["explanation"]}>{info.introduction}</p>
+            </div>
+            <div className={styles["keyword-row"]}>
+              <p className={styles["category"]}>발송 주기</p>
+              <p className={styles["explanation"]}>{info.deliveryPeriod}</p>
+            </div>
+            <div className={styles["keyword-row"]}>
+              <p className={styles["category"]}>구독비</p>
+              <p className={styles["explanation"]}>{info.subscriptionFee}</p>
             </div>
           </div>
           <div className={styles["chip-box"]}>
