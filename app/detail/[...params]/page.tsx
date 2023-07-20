@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./styles.module.css";
 import Suggestion from "./components/Suggestion";
 import NewsLetterInfo from "./components/NewsLetterInfo";
 import { NewsletterResponseType } from "../../register/newsletter.type";
@@ -76,9 +75,8 @@ export default async function Page({ params: { params } }: DetailPageProps) {
   );
 
   return (
-    <div className={styles.wrapper}>
+    <div>
       <NewsLetterInfo info={newsletterInfo} />
-      <div className={styles.divider} />
       <Suggestion tag={newsletterInfo.field} list={featuredList} />
     </div>
   );

@@ -1,8 +1,19 @@
+"use client";
+
 import React from "react";
-import styles from "./styles/suggestion.module.css";
-import Image from "next/image";
 import { NewsletterResponseType } from "../../../register/newsletter.type";
-import Link from "next/link";
+import {
+  CardImage,
+  Container,
+  SuggestionBox,
+  SuggestionCard,
+  SuggestionIntroduction,
+  SuggestionPublisher,
+  SuggestionTitle,
+  SuggestionTitleBox,
+  Title,
+  Wrapper,
+} from "./styles/suggestion.styles";
 
 interface SuggestionProps {
   tag: string;
@@ -11,41 +22,41 @@ interface SuggestionProps {
 
 const Suggestion = ({ tag, list }: SuggestionProps) => {
   return (
-    <div className={styles["container"]}>
-      <h1 className={styles["title"]}>
-        <strong className={styles["colored"]}>{tag}</strong>추천 뉴스레터
-      </h1>
-      <div className={styles["suggestion-box"]}>
-        {list.map((item, index) => {
-          const { _id, newsletterName, mainImage, publisher, introduction } =
-            item;
-          return (
-            <Link
-              key={`${newsletterName}_${index}`}
-              className={styles["suggestion-card"]}
-              href={`/detail/${_id}`}
-            >
-              <Image
-                className={styles["card-image"]}
-                src={mainImage}
-                alt={newsletterName}
-                width={182}
-                height={182}
-              />
-              <div>
-                <div className={styles["suggestion-title-box"]}>
-                  <p className={styles["suggestion-title"]}>{newsletterName}</p>
-                  <p className={styles["suggestion-publisher"]}>{publisher}</p>
+    <Wrapper>
+      <Container>
+        <Title>
+          <strong>{tag}</strong>추천 뉴스레터
+        </Title>
+        <SuggestionBox>
+          {list.map((item, index) => {
+            const { _id, newsletterName, mainImage, publisher, introduction } =
+              item;
+            return (
+              <SuggestionCard
+                key={`${newsletterName}_${index}`}
+                href={`/detail/${_id}`}
+              >
+                <CardImage
+                  src={mainImage}
+                  alt={newsletterName}
+                  width={182}
+                  height={182}
+                />
+                <div>
+                  <SuggestionTitleBox>
+                    <SuggestionTitle>{newsletterName}</SuggestionTitle>
+                    <SuggestionPublisher>{publisher}</SuggestionPublisher>
+                  </SuggestionTitleBox>
+                  <SuggestionIntroduction>
+                    {introduction}
+                  </SuggestionIntroduction>
                 </div>
-                <p className={styles["suggestion-introduction"]}>
-                  {introduction}
-                </p>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-    </div>
+              </SuggestionCard>
+            );
+          })}
+        </SuggestionBox>
+      </Container>
+    </Wrapper>
   );
 };
 

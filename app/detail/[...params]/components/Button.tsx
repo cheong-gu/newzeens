@@ -19,7 +19,6 @@ const StyledButton = styled.button<ButtonStyleProps>`
   align-items: center;
   justify-content: center;
 
-  max-width: 334px;
   width: 100%;
   height: 68px;
 
@@ -45,7 +44,6 @@ const StyledButton = styled.button<ButtonStyleProps>`
     font-size: 18px;
     font-weight: 600;
     border-radius: 10px;
-    max-width: 100%;
     ${({ styleType }) =>
       styleType === "outlined" ? `width: 176px;` : `width: 100%;`}
   }
