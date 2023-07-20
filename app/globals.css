@@ -71,3 +71,7 @@ a {
   box-shadow: none;
   outline: none;
 }
+
+input, textarea {
+    font-family: 'Pretendard';
+}
