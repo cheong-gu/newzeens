@@ -54,7 +54,7 @@ const NewsLetterInfo = ({ info }: NewsLetterInfoProps) => {
             </KeywordBox>
             <ChipBox>
               <Chip active label={info.field} />
-              {info.keywords.map((value, index) => (
+              {info.keywords?.map((value, index) => (
                 <Chip key={`${value}_${index}`} label={value} />
               ))}
             </ChipBox>
@@ -68,7 +68,7 @@ const NewsLetterInfo = ({ info }: NewsLetterInfoProps) => {
             >
               <Button styleType="outlined" label="지난 호 보기" />
             </OutlinedLink>
-            <SolidLink href={info.subscribeLink}>
+            <SolidLink href={info.subscribeLink ?? "/"}>
               <Button styleType="solid" label="구독하기" />
             </SolidLink>
           </ButtonBox>

@@ -5,7 +5,7 @@ import { NewsletterResponseType } from "../../register/newsletter.type";
 
 const getCurrentNewsletter = async (id: string) => {
   const res = await fetch(`https://newzeens.store/newsLetter/${id}`, {
-    next: { revalidate: 0 },
+    next: { revalidate: 10 },
   });
   if (!res) {
     throw new Error("[DetailPage/getCurrentNewsletter] Something Wrong...");
@@ -22,7 +22,7 @@ const getFeaturedNewsletter = async (
     const response = await fetch(
       `https://newzeens.store/newsLetter?field=${tag}`,
       {
-        next: { revalidate: 0 },
+        next: { revalidate: 10 },
       }
     );
 

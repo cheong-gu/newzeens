@@ -9,7 +9,7 @@ export const NewsLetter = ({ list }: { list: ListProps }) => {
   const { newsletterName, mainImage, publisher, introduction } = list;
   return (
     <OutLine>
-      <Link href={`detail/${list?._id}`}>
+      <Link href={`/detail/${list?._id}`}>
         <div className="grid">
           <ImageStyle>
             <Image className="image" src={mainImage} alt="image" fill />
