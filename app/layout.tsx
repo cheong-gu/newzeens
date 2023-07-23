@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         <title>NEWZEENS</title>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="static/public/favicon.ico" sizes="any" />
         <link
           rel="stylesheet"
           type="text/css"
