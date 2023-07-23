@@ -31,12 +31,10 @@ export const InfoContainer = styled.div`
 
   @media (min-width: 600px) {
     flex-direction: row;
-    gap: 24px;
   }
   @media (min-width: 840px) {
     align-items: center;
     justify-content: center;
-    gap: 92px;
 
     margin-bottom: 42px;
   }
@@ -54,11 +52,13 @@ export const ImageBox = styled.div`
     height: 176px;
     border: 1px solid #dfe4f5;
     border-radius: 10px;
+    margin-right: 24px;
   }
   @media (min-width: 840px) {
     width: 388px;
     height: 388px;
     border: 0px;
+    margin-right: 92px;
   }
 
   & img {
@@ -118,17 +118,16 @@ export const KeywordBox = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 24px;
 
-  margin: 32px 0px;
+  margin-top: 32px;
+  margin-bottom: 8px;
 
   @media (min-width: 600px) {
-    gap: 8px;
-    margin: 20px 0px;
+    margin-top: 20px;
+    margin-bottom: 12px;
   }
 
   @media (min-width: 840px) {
-    gap: 0px;
     margin-top: 24px;
     margin-bottom: 36px;
   }
@@ -139,15 +138,15 @@ export const KeywordRow = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 8px;
+  margin-bottom: 24px;
 
   @media (min-width: 600px) {
     flex-direction: row;
-    gap: 12px;
+    margin-bottom: 8px;
   }
 
   @media (min-width: 840px) {
-    gap: 40px;
+    margin-bottom: 0px;
   }
 `;
 
@@ -158,11 +157,17 @@ export const Category = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: 140%;
+  margin-bottom: 8px;
+
   @media (min-width: 600px) {
+    margin-bottom: 0px;
+    margin-right: 12px;
+
     min-width: 60px;
     font-size: 16px;
   }
   @media (min-width: 840px) {
+    margin-right: 40px;
     line-height: 170%;
   }
 `;
@@ -187,14 +192,12 @@ export const ChipBox = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  gap: 8px;
+  flex-wrap: wrap;
 
   @media (min-width: 600px) {
     margin-bottom: 116px;
   }
   @media (min-width: 840px) {
-    flex-wrap: wrap;
-    gap: 12px;
     margin-bottom: 36px;
   }
 `;
@@ -210,7 +213,6 @@ export const ButtonBox = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  gap: 8px;
 
   width: 100%;
   height: 60px;
@@ -225,7 +227,6 @@ export const ButtonBox = styled.div`
     padding: 0px;
     bottom: 32px;
     height: 52px;
-    gap: 16px;
   }
 
   @media (min-width: 840px) {
@@ -250,12 +251,15 @@ export const OutlinedLink = styled(Link)`
 
   max-width: 104px;
   width: 100%;
+  margin-right: 8px;
 
   @media (min-width: 600px) {
     max-width: 176px;
+    margin-right: 16px;
   }
   @media (min-width: 840px) {
     max-width: inherit;
+    margin-right: 24px;
   }
 `;
 

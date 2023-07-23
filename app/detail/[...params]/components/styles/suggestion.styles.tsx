@@ -89,11 +89,7 @@ export const SuggestionBox = styled.div`
 export const SuggestionCard = styled(Link)`
   display: flex;
   flex-direction: column;
-  gap: 16px;
   margin-bottom: 20px;
-  @media (min-width: 840px) {
-    gap: 24px;
-  }
 `;
 
 export const CardImage = styled(Image)`
@@ -101,6 +97,7 @@ export const CardImage = styled(Image)`
   height: 152px;
   border-radius: 10px;
   border: 0.6px solid var(--gray-40-c-7-cee-3, #c7cee3);
+  margin-bottom: 16px;
 
   @media (min-width: 600px) {
     width: 176px;
@@ -109,7 +106,7 @@ export const CardImage = styled(Image)`
   }
 
   @media (min-width: 840px) {
-    gap: 24px;
+    margin-bottom: 24px;
   }
 `;
 
@@ -118,7 +115,6 @@ export const SuggestionTitleBox = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 6px;
   margin-bottom: 8px;
 
   @media (min-width: 840px) {
@@ -136,7 +132,9 @@ export const SuggestionTitle = styled.p`
   font-style: normal;
   font-weight: 600;
   line-height: 100%; /* 15px */
+  margin-bottom: 6px;
   @media (min-width: 840px) {
+    margin-bottom: 0px;
     font-size: 18px;
   }
 `;
