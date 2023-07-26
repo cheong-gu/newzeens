@@ -35,6 +35,7 @@ const Suggestion = ({ tag, list }: SuggestionProps) => {
               <SuggestionCard
                 key={`${newsletterName}_${index}`}
                 href={`/${_id}`}
+                prefetch={false}
               >
                 <CardImage
                   src={mainImage}
