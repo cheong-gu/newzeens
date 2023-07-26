@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { NewsletterResponseType } from "../../../register/newsletter.type";
+import { NewsletterResponseType } from "../../register/newsletter.type";
 import {
   CardImage,
   Container,
@@ -34,7 +34,7 @@ const Suggestion = ({ tag, list }: SuggestionProps) => {
             return (
               <SuggestionCard
                 key={`${newsletterName}_${index}`}
-                href={`/detail/${_id}`}
+                href={`/${_id}`}
               >
                 <CardImage
                   src={mainImage}

@@ -4,7 +4,7 @@ import Image from "next/image";
 import React from "react";
 import Button from "./Button";
 import Chip from "./Chip";
-import { NewsletterResponseType } from "../../../register/newsletter.type";
+import { NewsletterResponseType } from "../../register/newsletter.type";
 import {
   ButtonBox,
   Category,
