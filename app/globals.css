@@ -32,38 +32,42 @@ body {
     height: 100%;
 }
 
+
+.swiper-button-prev {
+    background: url("/left.png") no-repeat !important;
+    /* width: 60px;
+    height: 60px; */
+}
+
+.swiper-button-next {
+    background: url("/right.png") no-repeat !important;
+    /* width: 60px;
+    height: 60px; */
+}
+
+.swiper-button-next, .swiper-button-prev {
+    width: 60px !important;
+    height: 60px !important;
+    top: 45% !important;
+}
+
+.swiper-button-prev, .swiper-rtl .swiper-button-next {
+    left: var(--swiper-navigation-sides-offset,20px) !important;
+    right: auto;
+    
+}
+
+.swiper-button-next, .swiper-rtl .swiper-button-prev {
+    right:var(--swiper-navißgation-sides-offset,40px) !important;
+    left: auto;
+    
+}
+
 .swiper-button-next::after,
 .swiper-button-prev::after {
     display: none;
 }
 
-.swiper-button-prev {
-    background: url("/left1.svg") no-repeat;
-    background-size: 38px, 38px;
-}
-
-.swiper-button-prev, .swiper-rtl .swiper-button-next {
-    left: var(--swiper-navigation-sides-offset,30px) !important;
-    /* right: auto; */
-    width: 38px !important;
-}
-
-.swiper-button-prev, .swiper-rtl .swiper-button-next:hover {
-    left: var(--swiper-navigation-sides-offset,30px) !important;
-    /* right: auto; */
-    width: 38px !important;
-}
-
-.swiper-button-next {
-    background: url("/right1.svg") no-repeat;
-    background-size: 38px, 38px;
-}
-
-.swiper-button-next, .swiper-rtl .swiper-button-prev {
-    right:var(--swiper-navigation-sides-offset,30px) !important;
-    /* left: auto; */
-    width: 38px !important;
-}
 
 a {
   padding: 0;

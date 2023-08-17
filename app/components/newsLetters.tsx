@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { NewsLetter } from "./newsLetter";
-import { TotalDiv } from "./styles/NewsLetters.styles";
+import { FirstLine, TotalDiv } from "./styles/NewsLetters.styles";
 import { OutLine } from "./styles/NewsLetters.styles";
 import { Player } from "@lottiefiles/react-lottie-player";
 import loading from "../../public/loading.json";
@@ -92,7 +92,7 @@ export default function NewsLetters({
   }, [field, keywords, deliveryPeriod, subscriptionFee, page, fetchData]);
 
   return (
-    <div>
+    <FirstLine>
       <TotalDiv>
         <div className="newsTotal">
           추천 뉴스레터 <span>{totalLength}</span>
@@ -115,6 +115,6 @@ export default function NewsLetters({
           />
         </div>
       )}
-    </div>
+    </FirstLine>
   );
 }

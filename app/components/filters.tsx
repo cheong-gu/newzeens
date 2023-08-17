@@ -79,11 +79,6 @@ export default function Filters({
   const [page, setPage] = useState<number>(1);
   const [totalLength, setTotalLength] = useState<number>(0);
 
-  useEffect(() => {
-    // 실행할 로직
-    console.log("Selected Field array: ", selectedField);
-  }, [selectedField]);
-
   const onclickAll = (event: MouseEvent<HTMLElement>) => {
     const text: string = event.currentTarget.innerText;
     if (arrField.includes(text)) {

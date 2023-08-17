@@ -26,6 +26,15 @@ export const BannerStyle = styled.div`
     object-fit: cover;
     filter: brightness(70%);
   }
+
+  .bannerContainer {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 13.5%;
+    .bn_image {
+      margin: 20px;
+    }
+  }
 `;
 
 export const Writter = styled.div`
@@ -33,8 +42,8 @@ export const Writter = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  top: 80px;
-  text-align: center;
+  top: 70px;
+  cursor: pointer;
   p {
     font-size: 24px;
     font-weight: 600;

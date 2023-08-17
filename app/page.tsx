@@ -5,6 +5,8 @@ import Banners from "./components/banners";
 import Filters from "./components/filters";
 import NewsLetters from "./components/newsLetters";
 import { useState } from "react";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 export default function Home() {
   const ContainerStyle = styled.div``;
@@ -16,13 +18,21 @@ export default function Home() {
   const [subscriptionFee, setSubscriptionFee] = useState<string>("");
   const [selectedField, setSelectedField] = useState<Array<string>>([]);
 
-
   return (
     <ContainerStyle>
+      <Header
+        onClickLogo={() => {
+          setField((prev) => "");
+          setKeywords((prev) => []);
+          setDeliveryPeriod((prev) => "");
+          setSubscriptionFee((prev) => "");
+          setSelectedField((prev) => []);
+        }}
+      />
       <Banners></Banners>
       <Filters
-        showModal = {showModal}
-        setShowModal = {setShowModal}
+        showModal={showModal}
+        setShowModal={setShowModal}
         field={field}
         selectedField={selectedField}
         keywords={keywords}
@@ -40,6 +50,7 @@ export default function Home() {
         deliveryPeriod={deliveryPeriod}
         subscriptionFee={subscriptionFee}
       ></NewsLetters>
+      <Footer />
     </ContainerStyle>
   );
 }

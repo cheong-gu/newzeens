@@ -2,7 +2,7 @@ import { mediaQuery } from "@/app/breakpoints";
 import styled from "@emotion/styled";
 
 export const FilterLi = styled.li`
-  margin: 0 4px;
+  margin: 0 8px 0 0;
   padding: 8px 12px;
   &.filter {
     width: max-content;

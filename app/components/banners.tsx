@@ -25,30 +25,57 @@ const Banners = () => {
       >
         <SwiperSlide>
           <BannerStyle>
-            <Image className="banner" src={"/PC-1.png"} alt="banner" fill />
-            <Writter>
-              <p>내게 꼭 맞는 뉴스레터를 발견해 보세요</p>
-              <span>매주 일요일 오전 12시 업데이트</span>
-            </Writter>
+            <Image className="banner" src={"/PC_1.png"} alt="banner" fill />
+            <div className="bannerContainer">
+              <Writter>
+                <p>내게 맞는 뉴스레터를 발견해 보세요</p>
+                <span>매주 일요일 오전 12시 업데이트</span>
+              </Writter>
+              <Image
+                className="bn_image"
+                src={"/PC-0.png"}
+                alt="bannerImage"
+                width={160}
+                height={160}
+              />
+            </div>
           </BannerStyle>
         </SwiperSlide>
         <SwiperSlide>
           <BannerStyle>
-            <Image className="banner" src={"/PC-2.png"} alt="banner" fill />
-            <Writter>
-              <p>부자가 되고 싶으신가요?</p>
-              <span>돈을 잘 벌고 잘 쓰는 방법을 알려주는 경제 뉴스레터</span>
-            </Writter>
+            <Image className="banner" src={"/PC_2.png"} alt="banner" fill />
+            <div className="bannerContainer">
+              <Writter>
+                <p>이번 주말에 뭐하세요?</p>
+                <span>맛집, 핫플, 전시 소식 등을 전해주는 트렌드 뉴스레터</span>
+              </Writter>
+              <Image
+                className="bn_image"
+                src={"/PC-1.png"}
+                alt="bannerImage"
+                width={160}
+                height={160}
+              />
+            </div>
           </BannerStyle>
         </SwiperSlide>
         <SwiperSlide>
           {" "}
           <BannerStyle>
-            <Image className="banner" src={"/PC-3.png"} alt="banner" fill />
-            <Writter>
-              <p>이번 주말에 뭐할랭?</p>
-              <span>맛집, 핫플, 전시 소식 등을 전해주는 트렌드 뉴스레터</span>
-            </Writter>
+            <Image className="banner" src={"/PC_3.png"} alt="banner" fill />
+            <div className="bannerContainer">
+              <Writter>
+                <p>부자가 되고 싶으신가요?</p>
+                <span>돈을 잘 벌고 잘 쓰는 방법을 알려주는 경제 뉴스레터</span>
+              </Writter>
+              <Image
+                className="bn_image"
+                src={"/PC-2.png"}
+                alt="bannerImage"
+                width={160}
+                height={160}
+              />
+            </div>
           </BannerStyle>
         </SwiperSlide>
       </Swiper>

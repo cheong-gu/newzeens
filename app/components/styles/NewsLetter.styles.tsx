@@ -7,6 +7,7 @@ export const OutLine = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 52px;
+    overflow: visible;
 
     ${mediaQuery.sm} {
       margin-bottom: 32px;
@@ -83,9 +84,9 @@ export const OutLine = styled.div`
     }
 
     ${mediaQuery.sm} {
-      max-width: 152px;
+      max-width: calc(50vw - 20px);
       line-height: 140%;
-      overflow: hidden;
+      overflow: visible;
       text-overflow: ellipsis;
       word-break: break-all;
     }
@@ -112,6 +113,7 @@ export const ImageStyle = styled.div`
     border-radius: 10px;
 
     :hover {
+      z-index: 999;
       animation: loop 0.5s forwards;
       /* transform */
     }
@@ -125,8 +127,8 @@ export const ImageStyle = styled.div`
   }
 
   ${mediaQuery.sm} {
-    max-width: 152px !important;
-    max-height: 152px !important;
+    max-width: calc(50vw - 20px) !important;
+    max-height: calc(50vw - 20px) !important;
     & img {
       object-fit: cover;
     }
