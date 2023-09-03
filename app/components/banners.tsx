@@ -33,10 +33,17 @@ const Banners = () => {
               </Writter>
               <Image
                 className="bn_image"
-                src={"/PC-0.png"}
+                src={"/NPC-0.png"}
                 alt="bannerImage"
                 width={160}
                 height={160}
+              />
+              <Image
+                className="bn_imageM"
+                src={"/NM-0.png"}
+                alt="bannerImage"
+                width={52}
+                height={52}
               />
             </div>
           </BannerStyle>
@@ -51,16 +58,22 @@ const Banners = () => {
               </Writter>
               <Image
                 className="bn_image"
-                src={"/PC-1.png"}
+                src={"/NPC-1.png"}
                 alt="bannerImage"
                 width={160}
                 height={160}
+              />
+              <Image
+                className="bn_imageM"
+                src={"/NM-1.png"}
+                alt="bannerImage"
+                width={52}
+                height={52}
               />
             </div>
           </BannerStyle>
         </SwiperSlide>
         <SwiperSlide>
-          {" "}
           <BannerStyle>
             <Image className="banner" src={"/PC_3.png"} alt="banner" fill />
             <div className="bannerContainer">
@@ -70,10 +83,17 @@ const Banners = () => {
               </Writter>
               <Image
                 className="bn_image"
-                src={"/PC-2.png"}
+                src={"/NPC-2.png"}
                 alt="bannerImage"
                 width={160}
                 height={160}
+              />
+              <Image
+                className="bn_imageM"
+                src={"/NM-2.png"}
+                alt="bannerImage"
+                width={52}
+                height={52}
               />
             </div>
           </BannerStyle>

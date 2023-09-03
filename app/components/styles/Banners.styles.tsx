@@ -24,15 +24,28 @@ export const BannerStyle = styled.div`
   min-height: 200px !important;
   & img {
     object-fit: cover;
-    filter: brightness(70%);
+    filter: brightness(100%);
   }
 
   .bannerContainer {
     display: flex;
     justify-content: space-between;
     margin: 0 13.5%;
+    ${mediaQuery.sm} {
+      flex-direction: column;
+      align-items: center;
+    }
     .bn_image {
       margin: 20px;
+      ${mediaQuery.sm} {
+        display: none;
+      }
+    }
+    .bn_imageM {
+      display: none;
+      ${mediaQuery.sm} {
+        display: inherit;
+      }
     }
   }
 `;
@@ -44,6 +57,11 @@ export const Writter = styled.div`
   position: relative;
   top: 70px;
   cursor: pointer;
+
+  ${mediaQuery.sm} {
+    top: 100px;
+  }
+
   p {
     font-size: 24px;
     font-weight: 600;
@@ -52,6 +70,7 @@ export const Writter = styled.div`
     ${mediaQuery.sm} {
       font-size: 18px;
       margin-bottom: 8px;
+      text-align: center;
     }
   }
   span {
@@ -61,6 +80,7 @@ export const Writter = styled.div`
 
     ${mediaQuery.sm} {
       font-size: 14px;
+      text-align: center;
     }
   }
 
